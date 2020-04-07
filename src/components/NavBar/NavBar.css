@@ -1,0 +1,33 @@
+.nav-bar {
+    display: flex;
+    flex-direction: space-between;
+    background-color: #0C5A1D;
+}
+
+.site-heading {
+    font-family: 'Dokdo', cursive;
+    font-size: 3em;
+    width: 50%;
+    color: white;
+    text-align: left;
+}
+
+.icon {
+    margin-top: 65px;
+}
+
+.nav-loggin-div {
+    margin-top: 25px;
+    margin-left: 25%;
+    justify-content: right;
+}
+
+.user-name {
+    color: white;
+}
+
+.nav-loggin-button {
+    width: 200px;
+    height: 40px;
+    border-radius: 4px;
+}

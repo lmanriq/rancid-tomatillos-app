@@ -1,0 +1,54 @@
+.details-section, 
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.details-section {
+  height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.title-container,
+.movie-details {
+  background-color: #FFF;
+  width: 30%;
+  margin: 1em;
+  padding: 0.5em;
+}
+
+.movie-details p {
+  margin-top: 0.5em;
+}
+
+.title-container,
+.movie-details,
+.details-section button {
+  width: 30%;
+  min-width: 14em;
+  border: 1px solid rgb(7, 92, 26);
+  border-radius: 5px;
+}
+
+.details-section button {
+  background-color: rgb(7, 92, 26);
+  color: #FFF;
+  font-size: 1.5em;
+  padding: 0.2em;
+}
+
+.stars-box {
+  margin: 0.5em 0;
+}
+
+.title-container button {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 0.6em;
+}

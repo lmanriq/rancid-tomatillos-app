@@ -1,0 +1,36 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+form {
+  width: 90%;
+  height: 30em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  background-color: #0C5A1D;
+  color: white;
+
+}
+
+input {
+  width: 80%;
+  height: 5em;
+}
+
+.login-button {
+  width: 40%;
+  height: 5em;
+  background-color: white;
+  color: black;
+}
+
+.login-button:hover {
+  background-color: yellow;
+  color: #0C5A1D;
+}
