@@ -6,6 +6,9 @@ import LoginPage from '../LoginPage/LoginPage'
 import { Route, Switch } from 'react-router-dom'
 
 function App() {
+  componentDidMount() {
+    fetch('https://rancid-tomatillos.herokuapp.com/api/v1/movies')
+  }
   return (
     <div className="App">
       <NavBar />
