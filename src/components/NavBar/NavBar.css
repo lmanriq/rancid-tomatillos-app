@@ -2,29 +2,35 @@
 
 .nav-bar {
     display: flex;
-    flex-direction: space-between;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: #0C5A1D;
+    padding: 1em;
 }
 
-
-
 .site-heading {
-    color: white;
+    color: #c5ef7c;
     font-family: 'Dokdo', cursive;
     font-size: 3em;
     margin: auto 20px;
-    /* text-align: left; */
+    text-align: left;
+    width: fit-content;
+}
+
+.header-icon-container {
     width: 50%;
+    display: flex;
 }
 
 .icon {
-    margin-top: 65px;
+    height: 5em;
+    margin: 0;
 }
 
-.nav-loggin-div {
-    margin: auto 20px;
-    /* margin-left: 25%; */
-    /* justify-content: right; */
+.nav-login-div {
+    margin-top: 20px;
+    margin-left: 25%;
+    justify-content: right;
 }
 
 .user-name {
