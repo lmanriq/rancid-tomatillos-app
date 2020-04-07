@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import MovieCardContainer from '../MovieCardContainer/MovieCardContainer';
 import NavBar from '../NavBar/NavBar';

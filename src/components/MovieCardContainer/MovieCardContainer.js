@@ -5,29 +5,44 @@ import { loadMovies } from '../../actions';
 import { connect } from 'react-redux';
 
 class MovieCardContainer extends Component {
-  // const movieCards = 
   constructor(props) {
     super(props);
     this.state = {
-
+      movies: []
     }
   }
 
   componentDidMount() {
-    console.log(this.props.loadMovies) 
+    console.log(this.props)
     fetch('https://rancid-tomatillos.herokuapp.com/api/v1/movies')
       .then(response => response.json())
-      // .then(data => console.log(data.movies))
-      .then(movieList => this.props.loadMovies(movieList.movies))
+      .then(movieList => {
+        this.props.loadMovies(movieList.movies)
+        this.setState({movies: movieList.movies})
+      })
       .catch(err => console.error(err.message))
   }
-  
+
   render() {
-    return (
-      <section className="movie-card-container">
-        <MovieCard />
-      </section>
-    )}
+    const movieCards = this.state.movies.map(movie => {
+      return (
+        <MovieCard
+          key={movie.id}
+          title={movie.title}
+          posterImage={movie.poster_path}
+          backdropImage={movie.backdrop_path}
+          releaseDate={movie.release_date}
+          overview={movie.overview}
+          averageRating={movie.average_rating}
+        />
+      )
+    })
+      return (
+        <section className="movie-card-container">
+          {movieCards}
+        </section>
+    )
+  }
 }
 
 const mapStateToProps = state => ({
@@ -38,4 +53,4 @@ const mapDispatchToProps = dispatch => ({
   loadMovies: movies => dispatch(loadMovies(movies))
 });
 
-export default connect(null, mapDispatchToProps)(MovieCardContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(MovieCardContainer)
