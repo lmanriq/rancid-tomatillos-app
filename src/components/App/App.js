@@ -1,12 +1,28 @@
 import React from 'react';
 import './App.css';
 import MovieCardContainer from '../MovieCardContainer/MovieCardContainer';
-import MovieDetails from '../MovieDetails/MovieDetails';
+import NavBar from '../NavBar/NavBar';
+import LoginPage from '../LoginPage/LoginPage'
+import { Route, Switch } from 'react-router-dom'
 
 function App() {
   return (
     <div className="App">
-      <MovieDetails />
+      <NavBar />
+      <Switch>
+        <Route
+          path="/" exact
+          component={() =>
+            <MovieCardContainer />
+          }
+        />
+        <Route
+          path="/login" exact
+          component={() =>
+            <LoginPage />
+          }
+        />
+      </Switch>
     </div>
   );
 }

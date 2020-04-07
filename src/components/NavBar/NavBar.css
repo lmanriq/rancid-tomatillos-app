@@ -1,15 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Dokdo&display=swap');
+
 .nav-bar {
     display: flex;
     flex-direction: space-between;
     background-color: #0C5A1D;
 }
 
+
+
 .site-heading {
+    color: white;
     font-family: 'Dokdo', cursive;
     font-size: 3em;
+    margin: auto 20px;
+    /* text-align: left; */
     width: 50%;
-    color: white;
-    text-align: left;
 }
 
 .icon {
@@ -17,9 +22,9 @@
 }
 
 .nav-loggin-div {
-    margin-top: 25px;
-    margin-left: 25%;
-    justify-content: right;
+    margin: auto 20px;
+    /* margin-left: 25%; */
+    /* justify-content: right; */
 }
 
 .user-name {
