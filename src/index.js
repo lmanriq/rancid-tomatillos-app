@@ -9,17 +9,16 @@ import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './reducers';
 
-const store = createStore(rootReducer, composeWithDevtools)
+const store = createStore(rootReducer, composeWithDevTools());
 
 const router = <BrowserRouter><App></App></BrowserRouter>
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-    {router}
-  </React.StrictMode>
+      {router}
+    </React.StrictMode>
   </Provider>
-  
   ,
   document.getElementById('root')
 );

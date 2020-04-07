@@ -1,9 +1,13 @@
 import React from 'react';
 import './MovieCard.css';
 
-const MovieCard = () => {
+const MovieCard = ({movies}) => {
 
-  const stars = Array(10).fill(<img className = "star" src = "Images/star-clear-outline.svg" alt = "empty star" />);
+console.log(movies)
+
+
+
+const stars = Array(10).fill(<img className = "star" src = "Images/star-clear-outline.svg" alt = "empty star" />);
 
   return (
   <section className="movie-card">

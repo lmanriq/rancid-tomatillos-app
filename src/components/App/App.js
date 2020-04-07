@@ -1,33 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import MovieCardContainer from '../MovieCardContainer/MovieCardContainer';
 import NavBar from '../NavBar/NavBar';
-import LoginPage from '../LoginPage/LoginPage'
-import { Route, Switch } from 'react-router-dom'
+import LoginPage from '../LoginPage/LoginPage';
+import { Route, Switch } from 'react-router-dom';
 
-function App() {
-  componentDidMount() {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v1/movies')
-  }
-  return (
-    <div className="App">
-      <NavBar />
-      <Switch>
-        <Route
-          path="/" exact
-          component={() =>
-            <MovieCardContainer />
-          }
-        />
-        <Route
-          path="/login" exact
-          component={() =>
-            <LoginPage />
-          }
-        />
-      </Switch>
-    </div>
-  );
+
+const App = () => {
+    return (
+      <div className="App">
+        <NavBar />
+        <Switch>
+          <Route
+            path="/" exact
+            component={() =>
+              <MovieCardContainer />
+            }
+          />
+          <Route
+            path="/login" exact
+            component={() =>
+              <LoginPage />
+            }
+          />
+        </Switch>
+      </div>
+    );
 }
 
 export default App;
