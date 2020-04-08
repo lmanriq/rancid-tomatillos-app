@@ -5,7 +5,6 @@ import NavBar from '../NavBar/NavBar';
 import LoginPage from '../LoginPage/LoginPage';
 import { Route, Switch } from 'react-router-dom';
 
-
 const App = () => {
     return (
       <div className="App">
@@ -21,6 +20,12 @@ const App = () => {
             path="/login" exact
             component={() =>
               <LoginPage />
+            }
+          />
+          <Route
+            path="/users/:user_id/ratings" exact
+            component={() =>
+              <MovieCardContainer />
             }
           />
         </Switch>
