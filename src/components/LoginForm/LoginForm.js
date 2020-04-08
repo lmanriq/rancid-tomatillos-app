@@ -63,7 +63,7 @@ class LoginForm extends Component {
                <NavLink
                 className="login-button"
                 to="/">
-                Login
+                <button type="button">Login</button>
               </NavLink>
           </div>
         </form>
