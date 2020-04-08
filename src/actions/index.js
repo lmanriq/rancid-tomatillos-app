@@ -7,3 +7,8 @@ export const loginUser = user => ({
   type: 'LOGIN_USER',
   user
 })
+
+export const loadReviews = reviews => ({
+  type: 'LOAD_REVIEWS',
+  reviews
+})
