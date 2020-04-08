@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 
 const NavBar = (props) => {
     let navDiv;
-    console.log(props.page)
     if (props.page === 'login') {
         navDiv = ''
     } else if (props.user) {
