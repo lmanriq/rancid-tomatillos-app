@@ -3,6 +3,7 @@ import './LoginForm.css';
 import { connect } from 'react-redux';
 import { loginUser, loadReviews, changePage } from '../../actions';
 import { NavLink } from 'react-router-dom';
+import { postUser, fetchUser } from '../../apicalls'
 
 class LoginForm extends Component {
   constructor() {
@@ -19,22 +20,16 @@ class LoginForm extends Component {
 
   submitLogin(e) {
     e.preventDefault();
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v1/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({email: this.state.email, password: this.state.password})
-    })
-    .then(res => res.json())
-    .then(data => {
-      this.props.loginUser(data)
-      fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${data.user.id}/ratings`)
-        .then(res => res.json())
-        .then(userFaves => this.props.loadReviews(userFaves.ratings))
-        .catch(err => console.error(err.message))
-    })
-    .catch(err => console.err(err.message))
+    postUser(this.state)
+      .then(data => {
+        // console.log('line 25', data)
+        this.props.loginUser(data)
+        loginUser(data)
+          // .then(data => console.log('line 28', data))
+          .then(userFaves => this.props.loadReviews(userFaves.ratings))
+          .catch(err => console.error(err.message))
+      })
+     .catch(err => console.error(err.message))
   }
 
   render() {
