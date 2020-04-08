@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import './LoginForm.css';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions'
-// {email: <String>, password: <String>}
+import { loginUser } from '../../actions';
+import { loadReviews } from '../../actions'
+import { NavLink } from 'react-router-dom';
 
 class LoginForm extends Component {
   constructor() {
@@ -27,7 +28,14 @@ class LoginForm extends Component {
       body: JSON.stringify({email: this.state.email, password: this.state.password})
     })
     .then(res => res.json())
-    .then(data => this.props.loginUser(data))
+    .then(data => {
+      this.props.loginUser(data)
+      fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${data.user.id}/ratings`)
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .then(userFaves => this.props.loadReviews(userFaves.ratings))
+        .catch(err => console.error(err.message))
+    })
     .catch(err => console.err(err.message))
   }
 
@@ -48,7 +56,16 @@ class LoginForm extends Component {
             type="password"
             placeholder="Password"
             value={this.state.password}/>
-          <button onClick={e => this.submitLogin(e)} type="button" className="login-button">Login</button>
+         <div
+            onClick={e => this.submitLogin(e)}
+            type="button"
+            className="login-button">
+               <NavLink
+                className="login-button"
+                to="/">
+                Login
+              </NavLink>
+          </div>
         </form>
       </section>
     )
@@ -56,11 +73,12 @@ class LoginForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  loginUser: user => dispatch(loginUser(user))
+  loginUser: user => dispatch(loginUser(user)),
+  loadReviews: reviews => dispatch(loadReviews(reviews))
 })
 
-const mapStateToProps = state => ({
-  // user: state.user
-})
+// const mapStateToProps = state => ({
+//   user: state.loginFlow.user //This is the global state path, user obj keys = id, name, email
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
+export default connect(null, mapDispatchToProps)(LoginForm)
