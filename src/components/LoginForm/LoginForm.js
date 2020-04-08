@@ -27,12 +27,12 @@ class LoginForm extends Component {
       body: JSON.stringify({email: this.state.email, password: this.state.password})
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => this.props.loginUser(data))
     .catch(err => console.err(err.message))
   }
 
   render() {
-        return(
+    return(
       <section className="login-container">
         <form>
           <h2>Login</h2>
@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = state => ({
-  
+  // user: state.user
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
