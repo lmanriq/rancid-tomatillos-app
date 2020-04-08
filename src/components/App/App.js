@@ -23,6 +23,12 @@ const App = () => {
               <LoginPage />
             }
           />
+          <Route
+            path="/users/:user_id/ratings" exact
+            component={() =>
+              <MovieCardContainer />
+            }
+          />
         </Switch>
       </div>
     );
