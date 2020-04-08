@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import './LoginForm.css';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions';
-import { loadReviews } from '../../actions'
+import { loginUser, loadReviews, changePage } from '../../actions';
 import { NavLink } from 'react-router-dom';
 
 class LoginForm extends Component {
@@ -32,7 +31,6 @@ class LoginForm extends Component {
       this.props.loginUser(data)
       fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${data.user.id}/ratings`)
         .then(res => res.json())
-        .then(data => console.log(data))
         .then(userFaves => this.props.loadReviews(userFaves.ratings))
         .catch(err => console.error(err.message))
     })
@@ -57,7 +55,10 @@ class LoginForm extends Component {
             placeholder="Password"
             value={this.state.password}/>
          <div
-            onClick={e => this.submitLogin(e)}
+            onClick={e => {
+              this.submitLogin(e)
+              this.props.changePage('movies')
+            }}
             type="button"
             className="login-button">
                <NavLink
@@ -74,11 +75,8 @@ class LoginForm extends Component {
 
 const mapDispatchToProps = dispatch => ({
   loginUser: user => dispatch(loginUser(user)),
-  loadReviews: reviews => dispatch(loadReviews(reviews))
+  loadReviews: reviews => dispatch(loadReviews(reviews)),
+  changePage: page => dispatch(changePage(page))
 })
-
-// const mapStateToProps = state => ({
-//   user: state.loginFlow.user //This is the global state path, user obj keys = id, name, email
-// })
 
 export default connect(null, mapDispatchToProps)(LoginForm)
