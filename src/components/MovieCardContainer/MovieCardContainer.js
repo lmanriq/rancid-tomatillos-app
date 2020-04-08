@@ -3,6 +3,7 @@ import MovieCard from '../MovieCard/MovieCard';
 import './MovieCardContainer.css';
 import { loadMovies } from '../../actions';
 import { connect } from 'react-redux';
+import { fetchForMovies } from '../../apicalls'
 
 class MovieCardContainer extends Component {
   constructor(props) {
@@ -13,9 +14,7 @@ class MovieCardContainer extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v1/movies')
-      .then(response => response.json())
+    fetchForMovies()
       .then(movieList => {
         this.props.loadMovies(movieList.movies)
       })
@@ -37,7 +36,7 @@ class MovieCardContainer extends Component {
       )
     })
       return (
-        <section className="movie-card-container">
+        <section data-testid="card-container" className="movie-card-container">
           {movieCards}
         </section>
     )
