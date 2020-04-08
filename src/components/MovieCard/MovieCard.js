@@ -3,7 +3,7 @@ import './MovieCard.css';
 
 const MovieCard = (props) => {
 
-const stars = Array(10).fill(<img className = "star" src = "Images/star-clear-outline.svg" alt = "empty star" />);
+const stars = Array(10).fill(<img className = "star" src = "/images/star-clear-outline.svg" alt = "empty star" />);
     //  key={movie.id}
     //       title={movie.title}
     //       posterImage={movie.poster_path}
