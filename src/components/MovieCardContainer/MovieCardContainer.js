@@ -18,13 +18,12 @@ class MovieCardContainer extends Component {
       .then(response => response.json())
       .then(movieList => {
         this.props.loadMovies(movieList.movies)
-        this.setState({movies: movieList.movies})
       })
       .catch(err => console.error(err.message))
   }
 
   render() {
-    const movieCards = this.state.movies.map(movie => {
+    const movieCards = this.props.movies.map(movie => {
       return (
         <MovieCard
           key={movie.id}
@@ -46,7 +45,7 @@ class MovieCardContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  movies: state.movies
+  movies: state.moviesList
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -3,8 +3,6 @@ import './MovieCard.css';
 
 const MovieCard = (props) => {
 
-console.log(props)
-
 const stars = Array(10).fill(<img className = "star" src = "Images/star-clear-outline.svg" alt = "empty star" />);
     //  key={movie.id}
     //       title={movie.title}
