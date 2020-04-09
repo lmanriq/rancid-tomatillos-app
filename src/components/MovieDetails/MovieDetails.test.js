@@ -24,8 +24,6 @@ describe('Movie Details', () => {
         }
     }
 
-    .mockResolvedValueOnce(mockDetails);
-
     const backButton = getByText("Back to Browse");
     expect(backButton).toBeInTheDocument();
 
