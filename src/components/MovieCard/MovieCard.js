@@ -29,7 +29,7 @@ const MovieCard = (props) => {
         alt="movie poster"
         className="movie-poster"
         src={props.posterImage}
-        />
+      />
       <h3>{props.title}</h3>
       <p>Avg. Rating: {props.averageRating.toFixed(1)}</p>
       <section className="rate-movie">

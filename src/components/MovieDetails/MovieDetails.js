@@ -53,14 +53,6 @@ class MovieDetails extends Component {
     const backgroundImage = {
       backgroundImage: `url(${movie.backdrop_path})`
     }
-    // const numStars = Math.ceil(this.state.movie.average_rating);
-    // const filledStars = Array(numStars).fill("/images/star-green.svg");
-    // const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
-    // const stars = filledStars.concat(emptyStars).map((star, index) => {
-    //   return (
-    //     <img key={index} onClick={() => this.rateMovie(index)} className = "star" src ={`${star}`} alt = "star" />
-    //   )
-    // })
 
     const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
     let stars;
@@ -90,7 +82,7 @@ class MovieDetails extends Component {
           </div>
           {this.state.error && <p>{this.state.error}</p>}
           {this.state.successMsg && <p>{this.state.successMsg}</p>}
-          <button>undo rating</button>
+          <button disabled={!currentReview}>undo rating</button>
         </div>
         <article className = "movie-details">
           <h3>Released: {movie.release_date}</h3>
