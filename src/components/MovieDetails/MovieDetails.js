@@ -53,14 +53,33 @@ class MovieDetails extends Component {
     const backgroundImage = {
       backgroundImage: `url(${movie.backdrop_path})`
     }
-    const numStars = Math.ceil(this.state.movie.average_rating);
-    const filledStars = Array(numStars).fill("/images/star-green.svg");
-    const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
-    const stars = filledStars.concat(emptyStars).map((star, index) => {
-      return (
-        <img key={index} onClick={() => this.rateMovie(index)} className = "star" src ={`${star}`} alt = "star" />
-      )
-    })
+    // const numStars = Math.ceil(this.state.movie.average_rating);
+    // const filledStars = Array(numStars).fill("/images/star-green.svg");
+    // const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
+    // const stars = filledStars.concat(emptyStars).map((star, index) => {
+    //   return (
+    //     <img key={index} onClick={() => this.rateMovie(index)} className = "star" src ={`${star}`} alt = "star" />
+    //   )
+    // })
+
+    const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
+    let stars;
+    const createStars = (rating, color) => {
+      const numStars = Math.ceil(rating);
+      const filledStars = Array(numStars).fill(`/images/star-${color}.svg`);
+      const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
+      stars = filledStars.concat(emptyStars).map((star, index) => {
+        return (
+          <img key={index} className = "star" src ={`${star}`} alt = {`${color} star`} />
+        )
+      })
+    }
+    
+    if (currentReview) {
+      createStars(currentReview.rating, 'yellow')
+    } else {
+      createStars(this.state.movie.average_rating, 'green')
+    }
 
     return (
       <section className = "details-section" style = {backgroundImage}>

@@ -8,7 +8,7 @@ const MovieCard = (props) => {
   let stars;
   const createStars = (rating, color) => {
     const numStars = Math.ceil(rating);
-    const filledStars = Array(numStars).fill(`images/star-${color}.svg`);
+    const filledStars = Array(numStars).fill(`/images/star-${color}.svg`);
     const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
     stars = filledStars.concat(emptyStars).map((star, index) => {
       return (
