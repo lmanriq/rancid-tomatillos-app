@@ -37,9 +37,13 @@ class MovieCardContainer extends Component {
       )
     })
       return (
-        <section data-testid="card-container" className="movie-card-container">
+        <div>
+          <h2>Recent Releases</h2>
+             <section data-testid="card-container" className="movie-card-container">
           {movieCards}
         </section>
+        </div>
+
     )
   }
 }

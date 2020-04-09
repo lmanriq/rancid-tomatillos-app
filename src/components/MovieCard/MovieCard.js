@@ -16,6 +16,7 @@ const MovieCard = (props) => {
     //       overview={movie.overview}
     //       averageRating={movie.average_rating}
   return (
+    
   <section className="movie-card">
     <img 
       alt="movie poster"
