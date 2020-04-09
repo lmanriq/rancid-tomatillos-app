@@ -3,7 +3,7 @@ import './LoginForm.css';
 import { connect } from 'react-redux';
 import { loginUser, loadReviews, changePage } from '../../actions';
 import { NavLink } from 'react-router-dom';
-import { postUser, fetchUser } from '../../apicalls'
+import { postUser, fetchRatings } from '../../apicalls'
 
 class LoginForm extends Component {
   constructor() {
@@ -22,10 +22,8 @@ class LoginForm extends Component {
     e.preventDefault();
     postUser(this.state)
       .then(data => {
-        // console.log('line 25', data)
         this.props.loginUser(data)
-        fetchUser(data)
-          // .then(data => console.log('line 28', data))
+        fetchRatings(data)
           .then(userFaves => this.props.loadReviews(userFaves.ratings))
           .catch(err => console.error(err.message))
       })

@@ -19,6 +19,7 @@ describe('Nav Bar', () => {
       </Provider>
     )
 
-    
+    const headEl = getByText('Rancid Tomatillos')
+    expect(headE)
   })
 })
