@@ -37,15 +37,15 @@ class MovieDetails extends Component {
     return (
       <section className = "details-section" style = {backgroundImage}>
         <div className = "title-container">
-          <h1>Underwater</h1>
+          <h1>{movie.title}</h1>
           <div className = "stars-box">
             {stars}
           </div>
           <button>undo rating</button>
         </div>
         <article className = "movie-details">
-          <h3>Released: 2020-01-08</h3>
-          <p>After an earthquake destroys their underwater station, six researchers must navigate two miles along the dangerous, unknown depths of the ocean floor to make it to safety in a race against time.</p>
+          <h3>Released: {movie.release_date}</h3>
+          <p>{movie.overview}</p>
         </article>
         <NavLink to="/">
           <button type="button">Back to Browse</button>
