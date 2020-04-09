@@ -1,16 +1,36 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './LoginPage.css'
 import LoginForm from '../LoginForm/LoginForm'
+import { connect } from 'react-redux';
 
-const LoginPage = () => {
-  return(
-    <section className="login-page">
-      <LoginForm />
-      <div className="login-image-container">
-        <img className="login-img" src="https://image.tmdb.org/t/p/original//AuGiPiGMYMkSosOJ3BQjDEAiwtO.jpg" alt="movie-poster" />
-      </div>
-    </section>
-  )
+class LoginPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      movieOfDay: this.props.movies[Math.floor(Math.random() * this.props.movies.length)]
+    }
+  }
+  render() {
+    const moviePoster = () => {
+      if (this.state.movieOfDay) {
+        return this.state.movieOfDay.poster_path
+      } else {
+        return 'https://image.tmdb.org/t/p/original//AuGiPiGMYMkSosOJ3BQjDEAiwtO.jpg'
+      }
+    }
+    return(
+      <section className="login-page">
+        <LoginForm />
+        <div className="login-image-container">
+          <h2>Movie Of The Day</h2>
+          <img className="login-img" src={moviePoster()} alt="movie-poster" />
+        </div>
+      </section>
+    )
+  }
 }
 
-export default LoginPage
+const mapStateToProps = state => ({
+  movies: state.moviesList
+})
+export default connect(mapStateToProps, null)(LoginPage)
