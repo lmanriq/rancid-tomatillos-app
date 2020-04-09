@@ -9,13 +9,21 @@ class MovieDetails extends Component {
     console.log(this.props)
     this.state = {
       movie: this.props.movies.find(movie => movie.id === this.props.id),
-      currentUserReview: null
+      currentUserReview: null,
+      error: ''
     }
   }
 
   rateMovie(index) {
     if (this.props.user) {
       // fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/:user_id/ratings`)
+    } else {
+      this.setState({error: 'You must be logged in to review a movie'});
+      setTimeout(() => {
+        this.setState({
+          error: ''
+        });
+      }, 2000);
     }
   }
 
@@ -41,6 +49,7 @@ class MovieDetails extends Component {
           <div className = "stars-box">
             {stars}
           </div>
+          {this.state.error && <p>{this.state.error}</p>}
           <button>undo rating</button>
         </div>
         <article className = "movie-details">
