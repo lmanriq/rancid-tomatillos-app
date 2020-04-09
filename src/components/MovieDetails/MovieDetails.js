@@ -10,13 +10,23 @@ class MovieDetails extends Component {
     this.state = {
       movie: this.props.movies.find(movie => movie.id === this.props.id),
       currentUserReview: null,
-      error: ''
+      error: '',
+      successMsg: ''
     }
   }
 
   rateMovie(index) {
     if (this.props.user) {
-      // fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/:user_id/ratings`)
+      fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ movie_id: this.props.id, rating: index })
+      })
+        .then(res => res.json())
+        .then(data => )
+        .catch(err => this.setState({error: err.message}))
     } else {
       this.setState({error: 'You must be logged in to review a movie'});
       setTimeout(() => {
