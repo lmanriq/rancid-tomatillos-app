@@ -20,6 +20,6 @@ describe('Nav Bar', () => {
     )
 
     const headEl = getByText('Rancid Tomatillos')
-    expect(headE)
+    expect(headEl).toBeInTheDocument()
   })
 })
