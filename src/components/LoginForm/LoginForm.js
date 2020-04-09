@@ -24,7 +24,7 @@ class LoginForm extends Component {
       .then(data => {
         // console.log('line 25', data)
         this.props.loginUser(data)
-        loginUser(data)
+        fetchUser(data)
           // .then(data => console.log('line 28', data))
           .then(userFaves => this.props.loadReviews(userFaves.ratings))
           .catch(err => console.error(err.message))
