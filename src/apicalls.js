@@ -1,10 +1,12 @@
+const BASE = 'https://rancid-tomatillos.herokuapp.com/api/v1'
+
 export const fetchForMovies = () => {
-  return fetch('https://rancid-tomatillos.herokuapp.com/api/v1/movies')
+  return fetch(BASE + '/movies')
       .then(response => response.json())
 }
 
 export const postUser = (state) => {
-  return fetch('https://rancid-tomatillos.herokuapp.com/api/v1/login', {
+  return fetch(BASE + '/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -15,6 +17,6 @@ export const postUser = (state) => {
 }
 
 export const fetchUser = (data) => {
-  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${data.user.id}/ratings`)
+  return fetch(BASE + `/users/${data.user.id}/ratings`)
     .then(res => res.json())
 }
