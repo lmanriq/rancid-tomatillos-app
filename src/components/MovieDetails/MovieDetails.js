@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './MovieDetails.css';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { addReview } from '../../actions'
 
 class MovieDetails extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class MovieDetails extends Component {
       })
         .then(res => res.json())
         .then(data => {
+          this.props.addReview(data.rating)
           this.setState({successMsg: `Your rating of ${data.rating.rating} stars has been successfully submitted`})
           setTimeout(() => {
             this.setState({
@@ -89,4 +91,8 @@ const mapStateToProps = state => ({
   reviews: state.loadReviews
 });
 
-export default connect(mapStateToProps, null)(MovieDetails)
+const mapDispatchToProps = dispatch => ({
+  addReview: review => dispatch(addReview(review))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails)
