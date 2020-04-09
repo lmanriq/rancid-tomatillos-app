@@ -18,6 +18,7 @@ const NavBar = (props) => {
                         to="/"
                         className="nav-login-link">
                         <button
+                        data-testid="logout-btn"
                         className="nav-login-button"
                         onClick={() => {
                             props.logOut()
