@@ -1,16 +1,20 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
+import { render, waitForElement } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import MovieCardContainer from './MovieCardContainer';
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from '../../reducers';
 import { fetchForMovies } from '../../apiCalls';
-jest.mock('../../apiCalls')
+jest.mock('../../apiCalls');
 
 describe('Movie card container', () => {
   it('should render what we expect', async () => {
+    const store = createStore(rootReducer);
+
     const { getByText, getByTestId } = render(
-      <Provider store={{storeState: store.getState()}}> 
+      <Provider store={store}>
         <Router>
           <MovieCardContainer />
         </Router>
@@ -39,9 +43,11 @@ describe('Movie card container', () => {
         }
       ]
     }
-    fetchForMovies.mockResolvedValueOnce(mockMovies)
 
-    const containerEl = getByTestId('card-container')
+    fetchForMovies.mockResolvedValueOnce(mockMovies);
+    const containerEl = getByTestId('card-container');
     expect(containerEl).toBeInTheDocument();
+    const sampleTitle = await waitForElement(() => getByText('Bloodshot'));
+    expect(sampleTitle).toBeInTheDocument();
   })
 })

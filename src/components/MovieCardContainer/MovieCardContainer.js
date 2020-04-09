@@ -36,14 +36,13 @@ class MovieCardContainer extends Component {
         />
       )
     })
-      return (
-        <div>
-          <h2>Recent Releases</h2>
-             <section data-testid="card-container" className="movie-card-container">
-          {movieCards}
-        </section>
-        </div>
-
+    return (
+      <div>
+        <h2>Recent Releases</h2>
+          <section data-testid="card-container" className="movie-card-container">
+            {movieCards}
+          </section>
+      </div>
     )
   }
 }

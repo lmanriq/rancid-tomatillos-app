@@ -14,16 +14,19 @@ class MovieDetails extends Component {
   }
 
   render() {
+    // might want to break out the movie destructuring so that we can use jest to mock it
     const { movie } = this.state;
-    console.log(movie)
     const backgroundImage = {
       backgroundImage: `url(${movie.backdrop_path})`
     }
-
-    const numStars = Math.ceil(movie.average_rating);
-    const filledStars = Array(numStars).fill(<img className = "star" src = "/images/star-green.svg" alt = "green star" />);
-    const emptyStars = Array(10 - numStars).fill(<img className = "star" src = "/images/star-clear-outline.svg" alt = "empty star" />);
-    const stars = filledStars.concat(emptyStars)
+    const numStars = Math.ceil(this.props.averageRating);
+    const filledStars = Array(numStars).fill("images/star-green.svg");
+    const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
+    const stars = filledStars.concat(emptyStars).map((star, index) => {
+      return (
+        <img key={index} className = "star" src ={`${star}`} alt = "star" />
+      )
+    })
 
     return (
       <section className = "details-section" style = {backgroundImage}>
