@@ -1,9 +1,13 @@
 import React from 'react';
 import './MovieCard.css';
+import { NavLink } from 'react-router-dom';
 
 const MovieCard = (props) => {
+  const numStars = Math.ceil(props.averageRating);
+  const filledStars = Array(numStars).fill(<img className = "star" src = "/images/star-green.svg" alt = "green star" />);
+  const emptyStars = Array(10 - numStars).fill(<img className = "star" src = "/images/star-clear-outline.svg" alt = "empty star" />);
+  const stars = filledStars.concat(emptyStars)
 
-const stars = Array(10).fill(<img className = "star" src = "/images/star-clear-outline.svg" alt = "empty star" />);
     //  key={movie.id}
     //       title={movie.title}
     //       posterImage={movie.poster_path}
@@ -23,7 +27,9 @@ const stars = Array(10).fill(<img className = "star" src = "/images/star-clear-o
     <section className="rate-movie">
       {stars}
     </section>
-    <button className="movie-details-btn">View Movie Details</button>
+    <NavLink to={`/movies/${props.id}`}>
+      <button className="movie-details-btn">View Movie Details</button>
+    </NavLink>
   </section>
   )
 }
