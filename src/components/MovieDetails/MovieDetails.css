@@ -40,6 +40,12 @@
   color: #FFF;
   font-size: 1.5em;
   padding: 0.2em;
+  cursor: pointer;
+}
+
+.details-section button:disabled {
+  color: gray;
+  cursor: not-allowed;
 }
 
 .stars-box {
