@@ -16,7 +16,7 @@ export const postUser = (state) => {
     .then(res => res.json())
 }
 
-export const fetchUser = (data) => {
+export const fetchRatings = (data) => {
   return fetch(BASE + `/users/${data.user.id}/ratings`)
     .then(res => res.json())
 }
