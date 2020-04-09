@@ -57,7 +57,7 @@ class LoginForm extends Component {
                <NavLink
                 className="login-link"
                 to="/">
-                <button className="login-button" type="button">Login</button>
+                <button data-testid="login-button" className="login-button" type="button">Login</button>
               </NavLink>
           </div>
         </form>

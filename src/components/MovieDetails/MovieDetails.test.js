@@ -9,7 +9,7 @@ import rootReducer from '../../reducers';
 describe('Movie Details', () => {
   it('Should render what we expect', () => {
     const store = createStore(rootReducer)
-    const { getByText, getByTestId } = render (
+    const { getByText } = render (
       <Provider store = {store}>
         <Router>
             <MovieDetails />
@@ -18,11 +18,22 @@ describe('Movie Details', () => {
     )
 
     const mockDetails = {
-        movie: = {
+        movie: {
             title: "Bloodshot",
             realese_date: "2020-03-05"
         }
     }
+
+    .mockResolvedValueOnce(mockDetails);
+
+    const backButton = getByText("Back to Browse");
+    expect(backButton).toBeInTheDocument();
+
+    const titleEl = getByText("Bloodshot");
+    expect(titleEl).toBeInTheDocument();
+
+    const releaseEl = getByText("2020-03-05");
+    expect(releaseEl).toBeInTheDocument();
   })
 })
 
