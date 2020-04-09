@@ -48,7 +48,8 @@ class MovieCardContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  movies: state.moviesList
+  movies: state.moviesList,
+  reviews: state.loadReviews
 });
 
 const mapDispatchToProps = dispatch => ({

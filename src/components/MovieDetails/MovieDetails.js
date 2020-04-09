@@ -9,7 +9,7 @@ class MovieDetails extends Component {
     console.log(this.props)
     this.state = {
       movie: this.props.movies.find(movie => movie.id === this.props.id),
-      currentUserReview: null,
+      currentUserReview: this.props.reviews.find(review => review.moive_id === this.props.id),
       error: '',
       successMsg: ''
     }
@@ -85,7 +85,8 @@ class MovieDetails extends Component {
 
 const mapStateToProps = state => ({
   movies: state.moviesList,
-  user: state.loginFlow.user
+  user: state.loginFlow.user,
+  reviews: state.loadReviews
 });
 
 export default connect(mapStateToProps, null)(MovieDetails)
