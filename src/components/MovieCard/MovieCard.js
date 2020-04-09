@@ -12,6 +12,7 @@ const stars = Array(10).fill(<img className = "star" src = "/images/star-clear-o
     //       overview={movie.overview}
     //       averageRating={movie.average_rating}
   return (
+    
   <section className="movie-card">
     <img 
       alt="movie poster"
