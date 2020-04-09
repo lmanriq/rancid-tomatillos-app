@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import './LoginForm.css';
 import { connect } from 'react-redux';
-import { loginUser, loadReviews, changePage } from '../../actions';
+import { loginUser, loadReviews, changePage, showError } from '../../actions';
 import { NavLink } from 'react-router-dom';
 import { postUser, fetchRatings } from '../../apicalls'
 
@@ -10,7 +10,8 @@ class LoginForm extends Component {
     super();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      errorMessage: ''
     }
   }
 
@@ -19,7 +20,10 @@ class LoginForm extends Component {
   }
 
   submitLogin(e) {
+    if(this.name === '' || this.state.email === '') {
     e.preventDefault();
+    this.props.showError({errorMessage: 'Please fill in all inputs'})
+    } else {
     postUser(this.state)
       .then(data => {
         this.props.loginUser(data)
@@ -28,9 +32,12 @@ class LoginForm extends Component {
           .catch(err => console.error(err.message))
       })
      .catch(err => console.error(err.message))
+    }
   }
 
   render() {
+    const {errorMessage } = this.state;
+
     return(
       <section className="login-container">
         <form>
@@ -60,6 +67,10 @@ class LoginForm extends Component {
                 <button data-testid="login-button" className="login-button" type="button">Login</button>
               </NavLink>
           </div>
+          <div>
+            <p>{errorMessage}</p>
+          </div> 
+        }
         </form>
       </section>
     )
@@ -69,7 +80,8 @@ class LoginForm extends Component {
 const mapDispatchToProps = dispatch => ({
   loginUser: user => dispatch(loginUser(user)),
   loadReviews: reviews => dispatch(loadReviews(reviews)),
-  changePage: page => dispatch(changePage(page))
+  changePage: page => dispatch(changePage(page)),
+  showError: errorMessage => dispatch(showError(errorMessage))
 })
 
 export default connect(null, mapDispatchToProps)(LoginForm)
