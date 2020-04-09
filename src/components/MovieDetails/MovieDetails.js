@@ -13,18 +13,24 @@ class MovieDetails extends Component {
     }
   }
 
+  rateMovie(index) {
+    if (this.props.user) {
+      // fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/:user_id/ratings`)
+    }
+  }
+
   render() {
     // might want to break out the movie destructuring so that we can use jest to mock it
     const { movie } = this.state;
     const backgroundImage = {
       backgroundImage: `url(${movie.backdrop_path})`
     }
-    const numStars = Math.ceil(this.props.averageRating);
-    const filledStars = Array(numStars).fill("images/star-green.svg");
+    const numStars = Math.ceil(this.state.movie.average_rating);
+    const filledStars = Array(numStars).fill("/images/star-green.svg");
     const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
     const stars = filledStars.concat(emptyStars).map((star, index) => {
       return (
-        <img key={index} className = "star" src ={`${star}`} alt = "star" />
+        <img key={index} onClick={() => this.rateMovie(index)} className = "star" src ={`${star}`} alt = "star" />
       )
     })
 
@@ -50,7 +56,8 @@ class MovieDetails extends Component {
 }
 
 const mapStateToProps = state => ({
-  movies: state.moviesList
+  movies: state.moviesList,
+  user: state.loginFlow.user
 });
 
 export default connect(mapStateToProps, null)(MovieDetails)
