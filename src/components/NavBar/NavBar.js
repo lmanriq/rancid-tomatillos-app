@@ -16,8 +16,10 @@ const NavBar = (props) => {
                     </h4>
                     <NavLink
                         to="/"
-                        className="nav-login-button">
-                        <button onClick={() => {
+                        className="nav-login-link">
+                        <button
+                        className="nav-login-button"
+                        onClick={() => {
                             props.logOut()
                             props.clearReviews()
                             props.changePage('movies')
@@ -33,8 +35,9 @@ const NavBar = (props) => {
                 </h4>
                 <NavLink
                     to="/login"
-                    className="nav-login-button">
+                    className="nav-login-link">
                     <button
+                        className="nav-login-button"
                         onClick={() => props.changePage('login')}>
                         Login
                     </button>
