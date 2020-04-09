@@ -27,7 +27,7 @@ const App = () => {
             path="/movies/:movie_id"
             component={({ match }) => {
               const { params } = match;
-              return (<MovieDetails 
+              return (<MovieDetails
                 id={parseInt(params.movie_id)}
               />)
             }}
