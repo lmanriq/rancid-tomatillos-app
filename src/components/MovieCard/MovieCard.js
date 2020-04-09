@@ -2,8 +2,11 @@ import React from 'react';
 import './MovieCard.css';
 
 const MovieCard = (props) => {
+const numStars = Math.ceil(props.averageRating);
+const filledStars = Array(numStars).fill(<img className = "star" src = "/images/star-green.svg" alt = "green star" />);
+const emptyStars = Array(10 - numStars).fill(<img className = "star" src = "/images/star-clear-outline.svg" alt = "empty star" />);
+const stars = filledStars.concat(emptyStars)
 
-const stars = Array(10).fill(<img className = "star" src = "/images/star-clear-outline.svg" alt = "empty star" />);
     //  key={movie.id}
     //       title={movie.title}
     //       posterImage={movie.poster_path}
