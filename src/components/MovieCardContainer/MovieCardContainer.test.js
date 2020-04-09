@@ -43,6 +43,7 @@ describe('Movie card container', () => {
         }
       ]
     }
+
     fetchForMovies.mockResolvedValueOnce(mockMovies);
     const containerEl = getByTestId('card-container');
     expect(containerEl).toBeInTheDocument();
