@@ -26,6 +26,7 @@ class MovieCardContainer extends Component {
       return (
         <MovieCard
           key={movie.id}
+          id={movie.id}
           title={movie.title}
           posterImage={movie.poster_path}
           backdropImage={movie.backdrop_path}
