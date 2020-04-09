@@ -55,11 +55,11 @@ class LoginForm extends Component {
               this.props.changePage('movies')
             }}
             type="button"
-            className="login-button">
+            className="login-container">
                <NavLink
-                className="login-button"
+                className="login-link"
                 to="/">
-                <button type="button">Login</button>
+                <button className="login-button" type="button">Login</button>
               </NavLink>
           </div>
         </form>
