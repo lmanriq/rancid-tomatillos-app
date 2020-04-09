@@ -17,7 +17,6 @@ describe('App', () => {
     const { getByText } = render(
       <Provider store={store}>
         <Router>
-          <NavBar />
           <LoginForm />
         </Router>
       </Provider>
@@ -27,7 +26,7 @@ describe('App', () => {
   it('can have users log in', async () => {
     const store = createStore(rootReducer)
 
-    const { getByText } = render(
+    const { getByText, getByTestId } = render(
       <Provider store={store}>
         <Router>
           <NavBar />
@@ -51,7 +50,7 @@ describe('App', () => {
     postUser.mockResolvedValueOnce(mockUser);
     fetchRatings.mockResolvedValueOnce(mockRatings);
 
-    const loginBtn = getByText('Login');
+    const loginBtn = getByTestId('login-button');
     fireEvent.click(loginBtn);
     const welcomeMsg = await waitForElement(() => getByText('Welcome, Marge'))
     expect(welcomeMsg).toBeInTheDocument();
