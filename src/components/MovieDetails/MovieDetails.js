@@ -17,15 +17,23 @@ class MovieDetails extends Component {
 
   rateMovie(index) {
     if (this.props.user) {
+      const rating = index + 1;
       fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ movie_id: this.props.id, rating: index })
+        body: JSON.stringify({ movie_id: this.props.id, rating: rating })
       })
         .then(res => res.json())
-        .then(data => )
+        .then(data => {
+          this.setState({successMsg: `Your rating of ${data.rating.rating} stars has been successfully submitted`})
+          setTimeout(() => {
+            this.setState({
+              successMsg: ''
+            });
+          }, 2000);
+        })
         .catch(err => this.setState({error: err.message}))
     } else {
       this.setState({error: 'You must be logged in to review a movie'});
@@ -60,6 +68,7 @@ class MovieDetails extends Component {
             {stars}
           </div>
           {this.state.error && <p>{this.state.error}</p>}
+          {this.state.successMsg && <p>{this.state.successMsg}</p>}
           <button>undo rating</button>
         </div>
         <article className = "movie-details">
