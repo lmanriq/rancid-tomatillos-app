@@ -22,7 +22,7 @@ const MovieCard = (props) => {
   } else {
     createStars(props.averageRating, 'green')
   }
-  
+
   return (
     <section className="movie-card">
       <img
