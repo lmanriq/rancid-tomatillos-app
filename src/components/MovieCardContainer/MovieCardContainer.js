@@ -22,7 +22,8 @@ class MovieCardContainer extends Component {
   }
 
   render() {
-    const movieCards = this.props.movies.map(movie => {
+    const { movies } = this.props;
+    const movieCards = movies.map(movie => {
       return (
         <MovieCard
           key={movie.id}
@@ -37,7 +38,7 @@ class MovieCardContainer extends Component {
       )
     })
     return (
-      <div>
+      <div className="movie-card-page">
         <h2>Recent Releases</h2>
           <section data-testid="card-container" className="movie-card-container">
             {movieCards}
