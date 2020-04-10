@@ -30,3 +30,8 @@ export const changePage = page => ({
   type: 'CHANGE_PAGE',
   page
 })
+
+export const showError = errorMessage => ({
+  type: 'SHOW_ERROR',
+  errorMessage
+})
