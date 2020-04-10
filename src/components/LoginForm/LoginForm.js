@@ -20,7 +20,7 @@ class LoginForm extends Component {
   }
 
   submitLogin(e) {
-    if(this.name === '' || this.state.email === '') {
+    if(this.state.name === '' || this.state.email === '') {
     e.preventDefault();
     this.props.showError({errorMessage: 'Please fill in all inputs'})
     } else {
