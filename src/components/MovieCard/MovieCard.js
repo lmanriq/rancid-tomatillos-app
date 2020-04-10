@@ -36,7 +36,9 @@ const MovieCard = (props) => {
         {stars}
       </section>
       <NavLink to={`/movies/${props.id}`}>
-        <button className="movie-details-btn">View Movie Details</button>
+        <button 
+        data-testid={props.id}
+        className="movie-details-btn">View Movie Details</button>
       </NavLink>
     </section>
   )
