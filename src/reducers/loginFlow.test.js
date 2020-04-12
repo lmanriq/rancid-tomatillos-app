@@ -15,7 +15,6 @@ describe('loginFlow', () => {
         email: 'alan@turing.io'
       }
     }
-
     const sampleUser = {
       id: 1,
       name: 'Alan',
@@ -24,20 +23,16 @@ describe('loginFlow', () => {
     const result = loginFlow({}, sampleAction);
     expect(result).toEqual(sampleUser);
   })
-  it('when receiving LOGOUT_USER action, it should return an empty', () => {
-    // const sampleAction = {
-    //   type: 'ADD_TODO',
-    //   text: 'Fire your mom',
-    //   completed: false,
-    //   id: 1
-    // }
-    // const sampleTodo = {
-    //   text: 'Fire your mom',
-    //   completed: false,
-    //   id: 1
-    // }
-    // const expectedResult = [sampleTodo];
-    // const result = todosReducer([], sampleAction);
-    // expect(result).toEqual(expectedResult)
+  it('when receiving LOGOUT_USER action, it should return an empty object', () => {
+    const sampleUser = {
+      id: 1,
+      name: 'Alan',
+      email: 'alan@turing.io'
+    }
+    const sampleAction = {
+      type: 'LOGOUT_USER'
+    }
+    const result = loginFlow(sampleUser, sampleAction);
+    expect(result).toEqual({})
   })
 })
