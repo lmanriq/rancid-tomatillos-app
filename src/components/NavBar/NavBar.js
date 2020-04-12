@@ -53,7 +53,7 @@ const NavBar = (props) => {
                     <img
                         alt="tomato logo"
                         className="icon"
-                        src="/images/tomato.svg"
+                        src= "rancid-tomatillos-app/images/tomato.svg"
                     />
                 </div>
                 {navDiv}

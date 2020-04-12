@@ -52,6 +52,10 @@
   margin: 0.5em 0;
 }
 
+.stars-box img:hover {
+  color: yellow;
+}
+
 .title-container button {
   background: none;
   border: none;

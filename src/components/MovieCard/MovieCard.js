@@ -5,12 +5,24 @@ import { connect } from 'react-redux';
 
 const MovieCard = (props) => {
   const currentReview = props.reviews.find(review => review.movie_id === props.id);
-  let stars;
-  const createStars = (rating, color) => {
+  let averageStars;
+  let userStars
+  const createAverageStars = (rating, color) => {
     const numStars = Math.ceil(rating);
     const filledStars = Array(numStars).fill(`/images/star-${color}.svg`);
     const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
-    stars = filledStars.concat(emptyStars).map((star, index) => {
+    averageStars = filledStars.concat(emptyStars).map((star, index) => {
+      return (
+        <img key={index} className = "star" src ={`${star}`} alt = {`${color} star`} />
+      )
+    })
+  }
+
+  const createUserStars = (rating, color) => {
+    const numStars = Math.ceil(rating);
+    const filledStars = Array(numStars).fill(`/images/star-${color}.svg`);
+    const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
+    userStars = filledStars.concat(emptyStars).map((star, index) => {
       return (
         <img key={index} className = "star" src ={`${star}`} alt = {`${color} star`} />
       )
@@ -18,11 +30,12 @@ const MovieCard = (props) => {
   }
   
   if (currentReview) {
-    createStars(currentReview.rating, 'yellow')
+    createUserStars(currentReview.rating, 'yellow')
+    createAverageStars(props.averageRating, 'green')
   } else {
-    createStars(props.averageRating, 'green')
+    createAverageStars(props.averageRating, 'green')
   }
-  
+
   return (
     <section className="movie-card">
       <img
@@ -31,12 +44,15 @@ const MovieCard = (props) => {
         src={props.posterImage}
       />
       <h3>{props.title}</h3>
-      <p>Avg. Rating: {props.averageRating.toFixed(1)}</p>
-      <section className="rate-movie">
-        {stars}
-      </section>
+        {currentReview ? <section className="rate-movie">
+                            <p>Avg. Rating: {averageStars}</p>
+                            <p>Your Rating: {userStars}</p>
+                          </section> :
+                          <section className="rate-movie">
+                            <p>Avg. Rating: {averageStars}</p>
+                          </section>}
       <NavLink to={`/movies/${props.id}`}>
-        <button 
+        <button
         data-testid={props.id}
         className="movie-details-btn">View Movie Details</button>
       </NavLink>

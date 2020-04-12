@@ -40,3 +40,8 @@ export const showError = errorMessage => ({
   type: 'SHOW_ERROR',
   errorMessage
 })
+
+export const sortMovies = option => ({
+  type: 'SORT_MOVIES',
+  option
+})
