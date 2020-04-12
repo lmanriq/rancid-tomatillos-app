@@ -1,3 +1,6 @@
+var moment = require('moment');
+moment().format();
+
 export const moviesList = (state = [], action) => {
   switch (action.type) {
     case 'LOAD_MOVIES':
@@ -6,7 +9,7 @@ export const moviesList = (state = [], action) => {
       let stateCopy = [...state];
       if (action.option === 'release-date') {
         stateCopy.sort((a, b) => {
-          return a.release_date - b.release_date
+          return moment(a.release_date) - moment(b.release_date)
         })
       } else if (action.option === 'alphabetical'){
         stateCopy.sort((a, b) => {
@@ -17,7 +20,6 @@ export const moviesList = (state = [], action) => {
           }
         })
       }
-      console.log(stateCopy);
       return stateCopy;
     default:
       return state;
