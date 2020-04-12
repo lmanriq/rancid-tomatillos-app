@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MovieCard from '../MovieCard/MovieCard';
 import './MovieCardContainer.css';
-import { loadMovies } from '../../actions';
+import { loadMovies, sortMovies } from '../../actions';
 import { connect } from 'react-redux';
 import { fetchForMovies } from '../../apicalls'
 
@@ -39,7 +39,10 @@ class MovieCardContainer extends Component {
     })
     return (
       <div className="movie-card-page">
-        <h2>Recent Releases</h2>
+        <div className="button-box">
+          <button onClick={() => this.props.sortMovies('release-date')}>Sort By Release Date</button>
+          <button onClick={() => this.props.sortMovies('alphabetical')}>Sort Alphabetically</button>
+        </div>
           <section data-testid="card-container" className="movie-card-container">
             {movieCards}
           </section>
@@ -53,7 +56,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadMovies: movies => dispatch(loadMovies(movies))
+  loadMovies: movies => dispatch(loadMovies(movies)),
+  sortMovies: option => dispatch(sortMovies(option))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieCardContainer)
