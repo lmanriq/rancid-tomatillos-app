@@ -2,9 +2,9 @@ import { loginFlow } from './loginFlow';
 
 describe('loginFlow', () => {
   it('should return the initial state', () => {
-    // const expectedResult = [];
-    // const result = todosReducer(undefined, {});
-    // expect(result).toEqual(expectedResult)
+    const expectedResult = {};
+    const result = loginFlow(undefined, {});
+    expect(result).toEqual(expectedResult)
   })
   it('when receiving LOGIN_USER action, it should return the user object', () => {
     // const sampleAction = {
