@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MovieCard from '../MovieCard/MovieCard';
 import './MovieCardContainer.css';
-import { loadMovies } from '../../actions';
+import { loadMovies, sortMovies } from '../../actions';
 import { connect } from 'react-redux';
 import { fetchForMovies } from '../../apicalls'
 
@@ -56,7 +56,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadMovies: movies => dispatch(loadMovies(movies))
+  loadMovies: movies => dispatch(loadMovies(movies)),
+  sortMovies: option => dispatch(sortMovies(option))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieCardContainer)
