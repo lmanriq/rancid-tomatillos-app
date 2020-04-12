@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "db812116e650997475e0bb70bfebb278",
+    "revision": "19a6889a74f49b08ebab3e8720e344a6",
     "url": "/rancid-tomatillos-app/index.html"
   },
   {
-    "revision": "2f841155768895f1e800",
+    "revision": "7842c518adeef8745013",
     "url": "/rancid-tomatillos-app/static/css/main.0dc2c779.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/rancid-tomatillos-app/static/js/2.a5a532fd.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2f841155768895f1e800",
-    "url": "/rancid-tomatillos-app/static/js/main.d0eeee5e.chunk.js"
+    "revision": "7842c518adeef8745013",
+    "url": "/rancid-tomatillos-app/static/js/main.034809a5.chunk.js"
   },
   {
     "revision": "aed63fe0d632300efbdc",
