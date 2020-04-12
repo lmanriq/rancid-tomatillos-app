@@ -9,8 +9,8 @@ const MovieCard = (props) => {
   let userStars
   const createAverageStars = (rating, color) => {
     const numStars = Math.ceil(rating);
-    const filledStars = Array(numStars).fill(`rancid-tomatillos-app/images/star-${color}.svg`);
-    const emptyStars = Array(10 - numStars).fill("rancid-tomatillos-app/images/star-clear-outline.svg");
+    const filledStars = Array(numStars).fill(`/rancid-tomatillos-app/images/star-${color}.svg`);
+    const emptyStars = Array(10 - numStars).fill("/rancid-tomatillos-app/images/star-clear-outline.svg");
     averageStars = filledStars.concat(emptyStars).map((star, index) => {
       return (
         <img key={index} className = "star" src ={`${star}`} alt = {`${color} star`} />
