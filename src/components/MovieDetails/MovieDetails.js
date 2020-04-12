@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './MovieDetails.css';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addReview } from '../../actions'
+import { addReview, loadMovies } from '../../actions'
+import { undoReview } from '../../actions'
 
 class MovieDetails extends Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class MovieDetails extends Component {
     this.state = {
       movie: this.props.movies.find(movie => movie.id === this.props.id),
       error: '',
-      successMsg: ''
+      successMsg: '',
+      currentRating: null
     }
   }
 
@@ -23,6 +25,14 @@ class MovieDetails extends Component {
       .catch(err => console.error(err.message))
   }
 
+  componentDidUpdate() {
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`)
+    .then(res => res.json())
+    .then(data => this.setState({
+      currentRating: data.ratings.find(rating => rating.movie_id === this.state.movie.id)
+    }))
+    .catch(err => console.error(err.message))
+  }
   rateMovie(index) {
     const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
     if (this.props.user && !currentReview) {
@@ -61,6 +71,16 @@ class MovieDetails extends Component {
       }, 2000);
     }
   }
+  undoRating() {
+    console.log(this.state.currentRating)
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings/${this.state.currentRating.id}`, {
+      method: 'DELETE',
+    })
+      .then(res => console.log(res))
+      .then(data => console.log(data))
+      .catch(err => console.error(err.message))
+  
+  }
 
   render() {
     // might want to break out the movie destructuring so that we can use jest to mock it
@@ -96,7 +116,7 @@ class MovieDetails extends Component {
             </div>
             {this.state.error && <p>{this.state.error}</p>}
             {this.state.successMsg && <p>{this.state.successMsg}</p>}
-            <button disabled={!currentReview}>undo rating</button>
+            <button onClick={() => this.undoRating()}>undo rating</button>
           </div>
           <article className = "movie-details">
             <h3>Released: {movie.release_date}</h3>
@@ -120,7 +140,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addReview: review => dispatch(addReview(review))
+  addReview: review => dispatch(addReview(review)),
+  undoReview: review => dispatch(undoReview(review))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails)
