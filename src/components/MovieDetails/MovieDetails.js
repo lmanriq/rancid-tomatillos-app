@@ -68,7 +68,6 @@ class MovieDetails extends Component {
     }
   }
   undoRating() {
-    // console.log(this.props)
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`)
     .then(res => res.json())
     .then(data => {
