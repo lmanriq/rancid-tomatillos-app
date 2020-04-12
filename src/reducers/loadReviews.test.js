@@ -72,6 +72,23 @@ describe('loadReviews', () => {
   })
 
   it('when receiving  ADD_REVIEWS action, it should add a moview review to the excisting array of movie reviews', () => {
+    const sampleAction = {
+        type: 'ADD_REVIEW',
+        review:
+            {
+              movie_id: 3,
+              rating: 8
+              }
+         }
 
+    const sampleAddReview = [
+          {
+            movie_id: 3,
+            rating: 8
+          }
+        ]
+
+    const result = loadReviews([], sampleAction)
+    expect(result).toEqual(sampleAddReview)
   })
 })
