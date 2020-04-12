@@ -56,4 +56,14 @@ describe('Action Creators', () => {
       ])
     expect(result).toEqual(expectedAction)
   })
+
+  it('should have a type of LOGOUT_USER' , () => {
+    const expectedAction = {
+      type: 'LOGOUT_USER'
+    }
+
+    const result = actions.logOut()
+
+    expect(result).toEqual(expectedAction)
+  })
 });
