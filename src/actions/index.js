@@ -13,6 +13,11 @@ export const addReview = review => ({
   review
 })
 
+export const undoRating = review => ({
+  type: 'UNDO_RATING',
+  review
+})
+
 export const loadReviews = reviews => ({
   type: 'LOAD_REVIEWS',
   reviews

@@ -3,15 +3,18 @@ import './MovieDetails.css';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addReview } from '../../actions'
+import { undoRating } from '../../actions'
 
 class MovieDetails extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
+    // console.log(this.props)
     this.state = {
       movie: this.props.movies.find(movie => movie.id === this.props.id),
       error: '',
-      successMsg: ''
+      successMsg: '',
+      removedMsg: '',
+      currentRating: null
     }
   }
 
@@ -22,7 +25,6 @@ class MovieDetails extends Component {
       .then(data => this.setState({movie: data.movie}))
       .catch(err => console.error(err.message))
   }
-
   rateMovie(index) {
     const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
     if (this.props.user && !currentReview) {
@@ -36,7 +38,11 @@ class MovieDetails extends Component {
       })
         .then(res => res.json())
         .then(data => {
-          this.props.addReview(data.rating)
+          fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`)
+            .then(res => res.json())
+            .then(data => {
+              this.props.addReview(data.ratings.find(rating => rating.movie_id === this.state.movie.id))
+            })
           this.setState({successMsg: `Your rating of ${data.rating.rating} stars has been successfully submitted`})
           setTimeout(() => {
             this.setState({
@@ -61,7 +67,27 @@ class MovieDetails extends Component {
       }, 2000);
     }
   }
-
+  undoRating() {
+    // console.log(this.props)
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`)
+    .then(res => res.json())
+    .then(data => {
+      this.setState({
+        currentRating: data.ratings.find(rating => rating.movie_id === this.state.movie.id)
+      }, () => {
+        fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings/${this.state.currentRating.id}`, {
+        method: 'DELETE',
+      })
+      .then(res => console.log(res))
+      .catch(err => console.error(err.message))
+      })
+    this.props.undoRating(this.state.currentRating)
+      this.setState({
+        currentRating: null
+      })
+    })
+    .catch(err => console.error(err.message))
+  }
   render() {
     // might want to break out the movie destructuring so that we can use jest to mock it
     const { movie } = this.state;
@@ -96,7 +122,7 @@ class MovieDetails extends Component {
             </div>
             {this.state.error && <p>{this.state.error}</p>}
             {this.state.successMsg && <p>{this.state.successMsg}</p>}
-            <button disabled={!currentReview}>undo rating</button>
+            <button onClick={() => this.undoRating()}>undo rating</button>
           </div>
           <article className = "movie-details">
             <h3>Released: {movie.release_date}</h3>
@@ -120,7 +146,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addReview: review => dispatch(addReview(review))
+  addReview: review => dispatch(addReview(review)),
+  undoRating: review => dispatch(undoRating(review))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails)
