@@ -63,7 +63,7 @@ class MovieDetails extends Component {
       const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
       stars = filledStars.concat(emptyStars).map((star, index) => {
         return (
-          <img key={index} onClick={() => this.rateMovie(index)}className = "star" src ={`${star}`} alt = {`${color} star`} />
+          <img key={index} onClick={() => !currentReview && this.rateMovie(index)} className = "star" src ={`${star}`} alt = {`${color} star`} />
         )
       })
     }
