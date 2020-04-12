@@ -17,7 +17,8 @@ class MovieDetails extends Component {
   }
 
   rateMovie(index) {
-    if (this.props.user) {
+    const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
+    if (this.props.user && !currentReview) {
       const rating = index + 1;
       fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`, {
         method: 'POST',
@@ -37,6 +38,13 @@ class MovieDetails extends Component {
           }, 2000);
         })
         .catch(err => this.setState({error: err.message}))
+    } else if(this.props.user) {
+      this.setState({error: 'Please undo your rating below to submit a new one.'});
+      setTimeout(() => {
+        this.setState({
+          error: ''
+        });
+      }, 2000);
     } else {
       this.setState({error: 'You must be logged in to review a movie'});
       setTimeout(() => {
@@ -63,7 +71,7 @@ class MovieDetails extends Component {
       const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
       stars = filledStars.concat(emptyStars).map((star, index) => {
         return (
-          <img key={index} onClick={() => !currentReview && this.rateMovie(index)} className = "star" src ={`${star}`} alt = {`${color} star`} />
+          <img key={index} onClick={() => this.rateMovie(index)} className = "star" src ={`${star}`} alt = {`${color} star`} />
         )
       })
     }
