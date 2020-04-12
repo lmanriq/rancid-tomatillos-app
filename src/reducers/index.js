@@ -4,11 +4,12 @@ import { loginFlow } from './loginFlow';
 import { loadReviews } from './loadReviews';
 import { updatePage } from './updatePage';
 
+
 const rootReducer = combineReducers({
   moviesList,
   loginFlow,
   loadReviews,
-  updatePage
+  updatePage,
 });
 
 export default rootReducer;
