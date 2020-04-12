@@ -9,9 +9,9 @@ describe('Action Creators', () => {
     const result = actions.changePage('login')
     expect(result).toEqual(expectedAction)
   })
+  
   //login user
-
-  it('should have a type of LOGIN_USER and thr correct payload', () => {
+  it('should have a type of LOGIN_USER and the correct payload', () => {
     const expectedAction = {
       type: 'LOGIN_USER',
       user: {email: 'test@gmail.com', passowrd: '123madit'}
@@ -22,6 +22,15 @@ describe('Action Creators', () => {
   })
 
   //add review
+  it('should have a type of LOGIN_USER and the correct payload', () => {
+    const expectedAction = {
+      type: 'ADD_REVIEW',
+      review: {movie_id: 12, rating: 5}
+    }
+
+    const result = actions.addReview({movie_id: 12, rating: 5})
+    expect(result).toEqual(expectedAction)
+  })
 
   
 });
