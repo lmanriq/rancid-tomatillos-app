@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import './MovieDetails.css';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addReview, loadMovies } from '../../actions'
-import { undoReview } from '../../actions'
+import { addReview } from '../../actions'
+import { undoRating } from '../../actions'
 
 class MovieDetails extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
+    // console.log(this.props)
     this.state = {
       movie: this.props.movies.find(movie => movie.id === this.props.id),
       error: '',
       successMsg: '',
+      removedMsg: '',
       currentRating: null
     }
   }
@@ -23,15 +24,6 @@ class MovieDetails extends Component {
       .then(res => res.json())
       .then(data => this.setState({movie: data.movie}))
       .catch(err => console.error(err.message))
-  }
-
-  componentDidUpdate() {
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`)
-    .then(res => res.json())
-    .then(data => this.setState({
-      currentRating: data.ratings.find(rating => rating.movie_id === this.state.movie.id)
-    }))
-    .catch(err => console.error(err.message))
   }
   rateMovie(index) {
     const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
@@ -46,7 +38,11 @@ class MovieDetails extends Component {
       })
         .then(res => res.json())
         .then(data => {
-          this.props.addReview(data.rating)
+          fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`)
+            .then(res => res.json())
+            .then(data => {
+              this.props.addReview(data.ratings.find(rating => rating.movie_id === this.state.movie.id))
+            })
           this.setState({successMsg: `Your rating of ${data.rating.rating} stars has been successfully submitted`})
           setTimeout(() => {
             this.setState({
@@ -72,16 +68,26 @@ class MovieDetails extends Component {
     }
   }
   undoRating() {
-    console.log(this.state.currentRating)
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings/${this.state.currentRating.id}`, {
-      method: 'DELETE',
-    })
+    // console.log(this.props)
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`)
+    .then(res => res.json())
+    .then(data => {
+      this.setState({
+        currentRating: data.ratings.find(rating => rating.movie_id === this.state.movie.id)
+      }, () => {
+        fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings/${this.state.currentRating.id}`, {
+        method: 'DELETE',
+      })
       .then(res => console.log(res))
-      .then(data => console.log(data))
       .catch(err => console.error(err.message))
-  
+      })
+    this.props.undoRating(this.state.currentRating)
+      this.setState({
+        currentRating: null
+      })
+    })
+    .catch(err => console.error(err.message))
   }
-
   render() {
     // might want to break out the movie destructuring so that we can use jest to mock it
     const { movie } = this.state;
@@ -141,7 +147,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addReview: review => dispatch(addReview(review)),
-  undoReview: review => dispatch(undoReview(review))
+  undoRating: review => dispatch(undoRating(review))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails)
