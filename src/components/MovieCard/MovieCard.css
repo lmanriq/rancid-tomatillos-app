@@ -2,10 +2,24 @@
   background: white;
   display: flex;
   flex-direction: column;
-  min-height: 450px;
+  justify-content: center;
+  align-items: center;
+  min-height: 545px;
   margin: auto 20px;
   padding: 10px;
-  min-width: 300px;
+  min-width: 400px;
+}
+
+.rate-movie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+}
+
+p {
+  width: fit-content;
 }
 
 .movie-poster {
