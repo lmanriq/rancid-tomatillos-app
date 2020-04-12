@@ -8,6 +8,26 @@ describe('Action Creators', () => {
     }
     const result = actions.changePage('login')
     expect(result).toEqual(expectedAction)
+  })  
+
+  it('should have a type of LOGIN_USER and the correct payload', () => {
+    const expectedAction = {
+      type: 'LOGIN_USER',
+      user: {id: 1, email: 'test@gmail.com', passowrd: '123madit'}
+    } 
+
+    const result = actions.loginUser({id: 1, email: 'test@gmail.com', passowrd: '123madit'})
+    expect(result).toEqual(expectedAction)
+  })
+
+  it('should have a type of LOGIN_USER and the correct payload', () => {
+    const expectedAction = {
+      type: 'ADD_REVIEW',
+      review: {movie_id: 12, rating: 5}
+    }
+
+    const result = actions.addReview({movie_id: 12, rating: 5})
+    expect(result).toEqual(expectedAction)
   })
 
   it('should have a type of LOAD_MOVIES and have a correct payload', () => {
