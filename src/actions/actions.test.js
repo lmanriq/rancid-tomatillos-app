@@ -14,10 +14,10 @@ describe('Action Creators', () => {
   it('should have a type of LOGIN_USER and the correct payload', () => {
     const expectedAction = {
       type: 'LOGIN_USER',
-      user: {email: 'test@gmail.com', passowrd: '123madit'}
+      user: {id: 1, email: 'test@gmail.com', passowrd: '123madit'}
     } 
 
-    const result = actions.loginUser({email: 'test@gmail.com', passowrd: '123madit'})
+    const result = actions.loginUser({id: 1, email: 'test@gmail.com', passowrd: '123madit'})
     expect(result).toEqual(expectedAction)
   })
 
