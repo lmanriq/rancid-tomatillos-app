@@ -10,14 +10,22 @@ class MovieDetails extends Component {
     console.log(this.props)
     this.state = {
       movie: this.props.movies.find(movie => movie.id === this.props.id),
-      currentUserReview: this.props.reviews.find(review => review.moive_id === this.props.id),
       error: '',
       successMsg: ''
     }
   }
 
+  componentDidMount() {
+    console.log(this.props.id)
+    fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/movies/${this.props.id}`)
+      .then(res => res.json())
+      .then(data => this.setState({movie: data.movie}))
+      .catch(err => console.error(err.message))
+  }
+
   rateMovie(index) {
-    if (this.props.user) {
+    const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
+    if (this.props.user && !currentReview) {
       const rating = index + 1;
       fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`, {
         method: 'POST',
@@ -37,6 +45,13 @@ class MovieDetails extends Component {
           }, 2000);
         })
         .catch(err => this.setState({error: err.message}))
+    } else if(this.props.user) {
+      this.setState({error: 'Please undo your rating below to submit a new one.'});
+      setTimeout(() => {
+        this.setState({
+          error: ''
+        });
+      }, 2000);
     } else {
       this.setState({error: 'You must be logged in to review a movie'});
       setTimeout(() => {
@@ -50,11 +65,6 @@ class MovieDetails extends Component {
   render() {
     // might want to break out the movie destructuring so that we can use jest to mock it
     const { movie } = this.state;
-    const backgroundImage = {
-      backgroundImage: `url(${movie.backdrop_path})`
-    }
-
-
     const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
     let stars;
     const createStars = (rating, color) => {
@@ -63,36 +73,43 @@ class MovieDetails extends Component {
       const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
       stars = filledStars.concat(emptyStars).map((star, index) => {
         return (
-          <img key={index} onClick={() => this.rateMovie(index)} className={`star star${index + 1}`} src ={`${star}`} alt = {`${color} star`} />
+          <img key={index} onClick={() => this.rateMovie(index)} className = "star" src ={`${star}`} alt = {`${color} star`} />
         )
       })
     }
-    
-    if (currentReview) {
+    if (movie && currentReview) {
       createStars(currentReview.rating, 'yellow')
-    } else {
+    } else if (movie) {
       createStars(this.state.movie.average_rating, 'green')
     }
-    return (
-      <section className = "details-section" style = {backgroundImage}>
-        <div className = "title-container">
-          <h1>{movie.title}</h1>
-          <div className = "stars-box">
-            {stars}
+
+    if(movie) {
+      const backgroundImage = {
+        backgroundImage: `url(${movie.backdrop_path})`
+      }
+      return (
+        <section className = "details-section" style = {backgroundImage}>
+          <div className = "title-container">
+            <h1>{movie.title}</h1>
+            <div className = "stars-box">
+              {stars}
+            </div>
+            {this.state.error && <p>{this.state.error}</p>}
+            {this.state.successMsg && <p>{this.state.successMsg}</p>}
+            <button disabled={!currentReview}>undo rating</button>
           </div>
-          {this.state.error && <p>{this.state.error}</p>}
-          {this.state.successMsg && <p>{this.state.successMsg}</p>}
-          <button disabled={!currentReview}>undo rating</button>
-        </div>
-        <article className = "movie-details">
-          <h3>Released: {movie.release_date}</h3>
-          <p>{movie.overview}</p>
-        </article>
-        <NavLink to="/">
-          <button type="button">Back to Browse</button>
-        </NavLink>
-      </section>
-    )
+          <article className = "movie-details">
+            <h3>Released: {movie.release_date}</h3>
+            <p>{movie.overview}</p>
+          </article>
+          <NavLink to="/">
+            <button type="button">Back to Browse</button>
+          </NavLink>
+        </section>
+      )
+    } else {
+      return (<section>loading...</section>)
+    }    
   }
 }
 
