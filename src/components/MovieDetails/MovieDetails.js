@@ -54,6 +54,7 @@ class MovieDetails extends Component {
       backgroundImage: `url(${movie.backdrop_path})`
     }
 
+
     const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
     let stars;
     const createStars = (rating, color) => {
@@ -66,13 +67,12 @@ class MovieDetails extends Component {
         )
       })
     }
-
+    
     if (currentReview) {
       createStars(currentReview.rating, 'yellow')
     } else {
       createStars(this.state.movie.average_rating, 'green')
     }
-
     return (
       <section className = "details-section" style = {backgroundImage}>
         <div className = "title-container">

@@ -54,5 +54,10 @@ describe('App', () => {
     fireEvent.click(loginBtn);
     const welcomeMsg = await waitForElement(() => getByText('Welcome, Marge'))
     expect(welcomeMsg).toBeInTheDocument();
+    const header = getByText('Rancid Tomatillos');
+    expect(header).toBeInTheDocument()
+    const logoutBtn = getByTestId('logout-btn')
+    fireEvent.click(logoutBtn);
+    expect(getByText('Welcome! Please Login')).toBeInTheDocument()
   })
 })

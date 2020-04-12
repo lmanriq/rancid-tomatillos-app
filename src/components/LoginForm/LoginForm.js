@@ -10,7 +10,8 @@ class LoginForm extends Component {
     super();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      errorMessage: ''
     }
   }
 
@@ -19,7 +20,6 @@ class LoginForm extends Component {
   }
 
   submitLogin(e) {
-    e.preventDefault();
     postUser(this.state)
       .then(data => {
         this.props.loginUser(data)
@@ -31,6 +31,9 @@ class LoginForm extends Component {
   }
 
   render() {
+    const { email, password } = this.state;
+    const isEnabled =  email.length > 0 &&  password.length > 0;
+    
     return(
       <section className="login-container">
         <form>
@@ -57,9 +60,12 @@ class LoginForm extends Component {
                <NavLink
                 className="login-link"
                 to="/">
-                <button data-testid="login-button" className="login-button" type="button">Login</button>
+                <button disabled={!isEnabled} data-testid="login-button" className="login-button" type="button">Login</button>
               </NavLink>
           </div>
+            <div>
+              <p>{this.state.errorMessage}</p>
+            </div>
         </form>
       </section>
     )

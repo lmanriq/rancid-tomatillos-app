@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent, waitForElement } from '@testing-library/react';
 import MovieCard from './MovieCard';
 import '@testing-library/jest-dom';
 import { BrowserRouter as Router } from "react-router-dom";
@@ -8,7 +8,7 @@ import { createStore } from 'redux';
 import rootReducer from '../../reducers';
 
 describe('Movie Card', () => {
-  it('should render what we expect', () => {
+  it('should render what we expect', async () => {
     const store = createStore(rootReducer);
 
     const movie = {
@@ -21,7 +21,7 @@ describe('Movie Card', () => {
       "average_rating": 7.5
     }
 
-    const { getByText } = render(
+    const { getByText, getByTestId } = render(
       <Provider store={store}>
         <Router>
           <MovieCard 
@@ -41,5 +41,12 @@ describe('Movie Card', () => {
     expect(getByText('Bloodshot')).toBeInTheDocument();
     expect(getByText('Avg. Rating: 7.5')).toBeInTheDocument();
     expect(getByText('View Movie Details')).toBeInTheDocument();
+    fireEvent.click(getByText('View Movie Details'));
+    let detailsBtn = getByTestId('1')
+    fireEvent.click(detailsBtn)
+    let desc = setTimeout(() => {
+      getByText("After he and his wife are murdered, marine Ray Garrison is resurrected by a team of scientists. Enhanced with nanotechnology, he becomes a superhuman, biotech killing machine—'Bloodshot'. As Ray first trains with fellow super-soldiers, he cannot recall anything from his former life. But when his memories flood back and he remembers the man that killed both him and his wife, he breaks out of the facility to get revenge, only to discover that there's more to the conspiracy than he thought.")
+      expect(desc).toBeInTheDocument()
+    }, 1500)
   })
 })
