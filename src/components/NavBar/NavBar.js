@@ -15,7 +15,7 @@ const NavBar = (props) => {
                         Welcome, {props.user.name}
                     </h4>
                     <NavLink
-                        to="/rancid-tomatillos-app"
+                        to="/"
                         className="nav-login-link">
                         <button
                         data-testid="logout-btn"

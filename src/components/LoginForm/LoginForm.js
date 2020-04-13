@@ -59,7 +59,7 @@ class LoginForm extends Component {
             className="login-container">
                <NavLink
                 className="login-link"
-                to="/rancid-tomatillos-app">
+                to="/">
                 <button data-testid="to-movie-list" disabled={!isEnabled} className="login-button" type="button">Login</button>
               </NavLink>
           </div>

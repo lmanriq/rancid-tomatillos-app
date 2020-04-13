@@ -147,7 +147,7 @@ class MovieDetails extends Component {
             <h3>Released: {movie.release_date}</h3>
             <p>{movie.overview}</p>
           </article>
-          <NavLink to="/rancid-tomatillos-app">
+          <NavLink to="/">
             <button type="button">Back to Browse</button>
           </NavLink>
         </section>

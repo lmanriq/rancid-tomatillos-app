@@ -12,7 +12,7 @@ jest.mock('../../apicalls');
 describe('App', () => {
   it('Should render what we expect', () => {
     const store = createStore(rootReducer);
-    
+
     const mockMovies = {
       movies: [
         {
@@ -40,7 +40,7 @@ describe('App', () => {
 
     const { getByText } = render(
       <Provider store={store}>
-        <Router>
+        <Router basename="/rancid-tomatillos-app">
           <App />
         </Router>
       </Provider>
@@ -51,26 +51,6 @@ describe('App', () => {
 
   it('can have users log in', async () => {
     const store = createStore(rootReducer)
-  
-    const { getByText, getByTestId } = render(
-      <Provider store={store}>
-        <Router>
-          <App />
-        </Router>
-      </Provider>
-    )
-
-    const mockUser = {
-      user: {
-        id: 9,
-        name: "Marge",
-        email: "marge@turing.io"
-      }
-    }
-
-    const mockRatings = {
-      ratings: []
-    }
 
     const mockMovies = {
       movies: [
@@ -95,10 +75,31 @@ describe('App', () => {
       ]
     }
 
-    fetchForMovies.mockResolvedValueOnce(mockMovies);
+    fetchForMovies.mockResolvedValue(mockMovies);
+
+    const { getByText, getByTestId } = render(
+      <Provider store={store}>
+        <Router basename="/rancid-tomatillos-app">
+          <App />
+        </Router>
+      </Provider>
+    )
+
+    const mockUser = {
+      user: {
+        id: 9,
+        name: "Marge",
+        email: "marge@turing.io"
+      }
+    }
+
+    const mockRatings = {
+      ratings: []
+    }
+
     postUser.mockResolvedValueOnce(mockUser);
     fetchRatings.mockResolvedValueOnce(mockRatings);
-    
+
     const toLoginForm = getByTestId('to-login-form');
     fireEvent.click(toLoginForm);
     const loginBtn = getByTestId('to-movie-list');
@@ -143,22 +144,22 @@ describe('App', () => {
       ratings: []
     }
 
-    fetchForMovies.mockResolvedValueOnce(mockMovies);
+    fetchForMovies.mockResolvedValue(mockMovies);
 
     const { getByText, getByTestId } = render(
       <Provider store={store}>
-        <Router>
+        <Router basename="/rancid-tomatillos-app">
           <App />
         </Router>
       </Provider>
     )
     postUser.mockResolvedValueOnce(mockUser);
     fetchRatings.mockResolvedValueOnce(mockRatings);
-    
+
     const toLoginForm = getByTestId('to-login-form');
     fireEvent.click(toLoginForm);
     const loginBtn = getByTestId('to-movie-list');
-    fireEvent.click(loginBtn);    
+    fireEvent.click(loginBtn);
     const logoutBtn = await waitForElement(() => getByTestId('logout-btn'));
     fireEvent.click(logoutBtn);
     expect(getByText('Welcome! Please Login')).toBeInTheDocument()
@@ -188,13 +189,13 @@ describe('App', () => {
       ]
     }
 
-    fetchForMovies.mockResolvedValueOnce(mockMovies);
-    fetchSpecificMovie.mockResolvedValueOnce(mockMovies[0]);
+    fetchForMovies.mockResolvedValue(mockMovies);
+    fetchSpecificMovie.mockResolvedValue(mockMovies[0]);
 
     const store = createStore(rootReducer)
     const { getByText, getByTestId } = render(
       <Provider store={store}>
-        <Router>
+        <Router basename="/rancid-tomatillos-app">
           <App />
         </Router>
       </Provider>

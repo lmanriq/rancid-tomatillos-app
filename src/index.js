@@ -11,7 +11,7 @@ import rootReducer from './reducers';
 
 const store = createStore(rootReducer, composeWithDevTools());
 
-const router = <BrowserRouter><App></App></BrowserRouter>
+const router = <BrowserRouter basename="/rancid-tomatillos-app"><App></App></BrowserRouter>
 
 ReactDOM.render(
   <Provider store={store}>
