@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './LoginPage.css'
-import LoginForm from '../LoginForm/LoginForm'
+import LoginForm from '../../containers/LoginForm/LoginForm'
 import { connect } from 'react-redux';
 
 class LoginPage extends Component {

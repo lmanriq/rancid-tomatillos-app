@@ -38,6 +38,7 @@ const NavBar = (props) => {
                     to="/login"
                     className="nav-login-link">
                     <button
+                        data-testid="to-login-form"
                         className="nav-login-button"
                         onClick={() => props.changePage('login')}>
                         Login
@@ -54,12 +55,12 @@ const NavBar = (props) => {
                         alt="tomato logo"
                         className="icon"
                         src= "/rancid-tomatillos-app/images/tomato.svg"
-                    />
+                        />
                 </div>
                 {navDiv}
             </section>
         )
-}
+    }
 
 const mapStateToProps = state => ({
   user: state.loginFlow.user,

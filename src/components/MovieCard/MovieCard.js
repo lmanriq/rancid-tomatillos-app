@@ -17,7 +17,7 @@ const MovieCard = (props) => {
       )
     })
   }
-
+ 
   const createUserStars = (rating, color) => {
     const numStars = Math.ceil(rating);
     const filledStars = Array(numStars).fill(`/rancid-tomatillos-app/images/star-${color}.svg`);

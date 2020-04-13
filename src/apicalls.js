@@ -20,3 +20,8 @@ export const fetchRatings = (data) => {
   return fetch(BASE + `/users/${data.user.id}/ratings`)
     .then(res => res.json())
 }
+
+export const fetchSpecificMovie = (id) => {
+  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/movies/${id}`)
+    .then(res => res.json())
+}
