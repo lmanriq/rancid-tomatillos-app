@@ -42,6 +42,11 @@ input {
   color: #0C5A1D;
 }
 
+.login-button[disable] {
+  background-color: grey;
+  color: #0C5A1D;
+}
+
 @media only screen and (max-width: 600px) {
   .login-container {
     align-items: flex-start;
