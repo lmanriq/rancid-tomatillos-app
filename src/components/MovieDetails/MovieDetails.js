@@ -8,7 +8,6 @@ import { undoRating } from '../../actions'
 class MovieDetails extends Component {
   constructor(props) {
     super(props);
-    console.log(props)
     this.state = {
       movie: this.props.movies.find(movie => movie.id === this.props.id),
       error: '',
@@ -25,8 +24,6 @@ class MovieDetails extends Component {
       .then(res => res.json())
       .then(data => this.setState({movie: data.movie}))
       .catch(err => console.error(err.message))
-
-    
   }
 
   rateMovie(index) {
