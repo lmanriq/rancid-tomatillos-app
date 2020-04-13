@@ -21,7 +21,7 @@ class MovieDetails extends Component {
 
   componentDidMount() {
     fetchSpecificMovie(this.props.id)
-      .then(data => this.setState({movie: data.movie}))
+      .then(data => data ? this.setState({movie: data.movie}) : '')
       .catch(err => console.error(err.message))
   }
 
