@@ -45,10 +45,13 @@ class MovieDetails extends Component {
             .then(data => {
               this.props.addReview(data.ratings.find(rating => rating.movie_id === this.state.movie.id))
             })
-          this.setState({successMsg: `Your rating of ${data.rating.rating} stars has been successfully submitted`})
+          this.setState({ 
+            successMsg: `Your rating of ${data.rating.rating} stars has been successfully submitted`,
+            disabled: false
+        })
           setTimeout(() => {
             this.setState({
-              successMsg: ''
+              successMsg: '',
             });
           }, 2000);
         })
@@ -86,16 +89,26 @@ class MovieDetails extends Component {
     this.props.undoRating(this.state.currentRating)
       this.setState({
         currentRating: null,
-        disabled: true
+        disabled: true,
+        removedMsg: 'This rating has been removed'
       })
       setTimeout(() => {
-        
-      })
+        this.setState({
+          removedMsg: ''
+        })
+      }, 2000)
     })
     .catch(err => console.error(err.message))
   }
 
   render() {
+    const ratingType = () => {
+      if (this.state.disabled) {
+        return 'Your Rating:'
+      } else {
+        return 'Avg. Rating:'
+      }
+    }
     // might want to break out the movie destructuring so that we can use jest to mock it
     const { movie } = this.state;
     const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
@@ -125,7 +138,7 @@ class MovieDetails extends Component {
           <div className = "title-container">
             <h1>{movie.title}</h1>
             <div className = "stars-box">
-              {stars}
+      {ratingType()}{stars}
             </div>
             {this.state.error && <p>{this.state.error}</p>}
             {this.state.successMsg && <p>{this.state.successMsg}</p>}
@@ -136,7 +149,7 @@ class MovieDetails extends Component {
             <h3>Released: {movie.release_date}</h3>
             <p>{movie.overview}</p>
           </article>
-          <NavLink to="/">
+          <NavLink to="/rancid-tomatillos-app">
             <button type="button">Back to Browse</button>
           </NavLink>
         </section>
