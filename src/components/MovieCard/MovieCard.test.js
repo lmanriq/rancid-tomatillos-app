@@ -39,7 +39,7 @@ describe('Movie Card', () => {
     )
 
     expect(getByText('Bloodshot')).toBeInTheDocument();
-    expect(getByText('Avg. Rating: 7.5')).toBeInTheDocument();
+    expect(getByText('Avg. Rating:')).toBeInTheDocument();
     expect(getByText('View Movie Details')).toBeInTheDocument();
   })
 })
