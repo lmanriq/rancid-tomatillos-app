@@ -41,3 +41,19 @@ input {
   background-color: yellow;
   color: #0C5A1D;
 }
+
+@media only screen and (max-width: 600px) {
+  .login-container {
+    align-items: flex-start;
+    height: 100vh;
+    padding-top: 20%;
+    width: 80%;
+  }
+  form {
+    height: 20em;
+  }
+  input, placeholder {
+    font-size: 1em;
+    padding: 3px;
+  }
+}

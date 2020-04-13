@@ -20,7 +20,7 @@ class LoginPage extends Component {
     }
     return(
       <section className="login-page">
-        <LoginForm />
+        <LoginForm className="login-form"/>
         <div className="login-image-container">
           <h2>Movie Of The Day</h2>
           <img className="login-img" src={moviePoster()} alt="movie-poster" />
