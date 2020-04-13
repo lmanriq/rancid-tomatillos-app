@@ -86,4 +86,75 @@ describe('Action Creators', () => {
 
     expect(result).toEqual(expectedAction)
   })
+  it('should have a type of LOAD_REVIEWS', () =>{
+    const expectedAction = {
+      type: 'LOAD_REVIEWS',
+      reviews: [
+        {
+          "id": 43,
+          "user_id": 9,
+          "movie_id": 9,
+          "rating": 5,
+          "created_at": "2020-04-10T21:20:32.371Z",
+          "updated_at": "2020-04-10T21:20:32.371Z"
+      },
+      {
+          "id": 202,
+          "user_id": 9,
+          "movie_id": 4,
+          "rating": 9,
+          "created_at": "2020-04-12T20:09:16.301Z",
+          "updated_at": "2020-04-12T20:09:16.301Z"
+      } 
+      ]
+    }
+    const result = actions.loadReviews([
+      {
+        "id": 43,
+        "user_id": 9,
+        "movie_id": 9,
+        "rating": 5,
+        "created_at": "2020-04-10T21:20:32.371Z",
+        "updated_at": "2020-04-10T21:20:32.371Z"
+    },
+    {
+        "id": 202,
+        "user_id": 9,
+        "movie_id": 4,
+        "rating": 9,
+        "created_at": "2020-04-12T20:09:16.301Z",
+        "updated_at": "2020-04-12T20:09:16.301Z"
+    },
+    ])
+    expect(result).toEqual(expectedAction)
+  })
+  it('should have a type CLEAR_REVIEWS', () => {
+    const expectedAction = {
+      type: 'CLEAR_REVIEWS'
+    }
+    const result = actions.clearReviews()
+    expect(result).toEqual(expectedAction)
+  })
+  it('should have a type UNDO_RATING', () => {
+    const expectedAction = {
+      type: 'UNDO_RATING',
+      review: {
+        created_at: "2020-04-12T21:38:37.236Z",
+        id: 238,
+        movie_id: 1,
+        rating: 9,
+        updated_at: "2020-04-12T21:38:37.236Z",
+        user_id: 9
+      }
+    }
+    const result = actions.undoRating({
+      created_at: "2020-04-12T21:38:37.236Z",
+      id: 238,
+      movie_id: 1,
+      rating: 9,
+      updated_at: "2020-04-12T21:38:37.236Z",
+      user_id: 9
+    })
+    expect(result).toEqual(expectedAction)
+  })
 });

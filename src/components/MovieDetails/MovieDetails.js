@@ -68,7 +68,6 @@ class MovieDetails extends Component {
     }
   }
   undoRating() {
-    // console.log(this.props)
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`)
     .then(res => res.json())
     .then(data => {
@@ -95,8 +94,8 @@ class MovieDetails extends Component {
     let stars;
     const createStars = (rating, color) => {
       const numStars = Math.ceil(rating);
-      const filledStars = Array(numStars).fill(`/images/star-${color}.svg`);
-      const emptyStars = Array(10 - numStars).fill("/images/star-clear-outline.svg");
+      const filledStars = Array(numStars).fill(`/rancid-tomatillos-app/images/star-${color}.svg`);
+      const emptyStars = Array(10 - numStars).fill("/rancid-tomatillos-app/images/star-clear-outline.svg");
       stars = filledStars.concat(emptyStars).map((star, index) => {
         return (
           <img key={index} onClick={() => this.rateMovie(index)} className = "star" src ={`${star}`} alt = {`${color} star`} />
