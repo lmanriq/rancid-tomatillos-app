@@ -14,7 +14,8 @@ class MovieDetails extends Component {
       error: '',
       successMsg: '',
       removedMsg: '',
-      currentRating: null
+      currentRating: null,
+      disabled: false
     }
   }
 
@@ -25,6 +26,7 @@ class MovieDetails extends Component {
       .then(data => this.setState({movie: data.movie}))
       .catch(err => console.error(err.message))
   }
+
   rateMovie(index) {
     const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
     if (this.props.user && !currentReview) {
@@ -67,6 +69,7 @@ class MovieDetails extends Component {
       }, 2000);
     }
   }
+
   undoRating() {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`)
     .then(res => res.json())
@@ -82,11 +85,16 @@ class MovieDetails extends Component {
       })
     this.props.undoRating(this.state.currentRating)
       this.setState({
-        currentRating: null
+        currentRating: null,
+        disabled: true
+      })
+      setTimeout(() => {
+        
       })
     })
     .catch(err => console.error(err.message))
   }
+
   render() {
     // might want to break out the movie destructuring so that we can use jest to mock it
     const { movie } = this.state;
@@ -121,7 +129,8 @@ class MovieDetails extends Component {
             </div>
             {this.state.error && <p>{this.state.error}</p>}
             {this.state.successMsg && <p>{this.state.successMsg}</p>}
-            <button onClick={() => this.undoRating()}>undo rating</button>
+            <button disabled={this.state.disabled} onClick={() => this.undoRating()}>undo rating</button>
+{this.state.removedMsg}
           </div>
           <article className = "movie-details">
             <h3>Released: {movie.release_date}</h3>
