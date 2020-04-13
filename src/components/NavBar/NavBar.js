@@ -38,6 +38,7 @@ const NavBar = (props) => {
                     to="/login"
                     className="nav-login-link">
                     <button
+                        data-testid="to-login-form"
                         className="nav-login-button"
                         onClick={() => props.changePage('login')}>
                         Login
