@@ -1,5 +1,4 @@
 import { moviesList } from './moviesList';
-import { tsImportEqualsDeclaration } from '@babel/types';
 
 describe('moviesListReduce', () => {
   it('When recieveing LOAD_MOVIES, should return an array of movies', () => {
