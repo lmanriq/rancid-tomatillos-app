@@ -42,8 +42,8 @@ input {
   color: #0C5A1D;
 }
 
-.login-button[disable] {
-  background-color: grey;
+.login-button[disabled] {
+  background-color: #D9D9D9;
   color: #0C5A1D;
 }
 
