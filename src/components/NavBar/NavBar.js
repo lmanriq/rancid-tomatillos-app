@@ -15,7 +15,7 @@ const NavBar = (props) => {
                         Welcome, {props.user.name}
                     </h4>
                     <NavLink
-                        to="/"
+                        to="/rancid-tomatillos-app"
                         className="nav-login-link">
                         <button
                         data-testid="logout-btn"
@@ -54,7 +54,7 @@ const NavBar = (props) => {
                         alt="tomato logo"
                         className="icon"
                         src= "/rancid-tomatillos-app/images/tomato.svg"
-                    />
+                        />
                 </div>
                 {navDiv}
             </section>
