@@ -1,21 +1,27 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Project Overview
 
-In the project directory, you can run:
+User login information:
+email: marge@turing.io
+password: password123
 
-### `npm start`
+Rancid Tomatillos is an application that allows users to browse movies, log into the server, rate movies, and view additional details about each movie. It is a showcase of our team's ability to work with progressively more complex React component structures. We used redux as a global store to minimize prop drilling and practice data management for large scale applications. We use React Router to navigate between pages and testes all of our synchronous and async functionality.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Technologies Used
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- JavaScript
+- React.js
+- Redux
+- React Router
+- React Testing Library
+- Jest
 
-### `npm test`
+### Screenshots
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Main Page Screenshot](https://user-images.githubusercontent.com/56371796/79157383-b514f180-7d91-11ea-96b7-46122529a6e4.png)
+![Login Page Screenshot](https://user-images.githubusercontent.com/56371796/79157269-8ac33400-7d91-11ea-9743-4819d14d6ed9.png)
+![Movie Details Page Screenshot](https://user-images.githubusercontent.com/56371796/79157420-c3fba400-7d91-11ea-90a1-4e36f2164c15.png)
 
 ### `npm run build`
 
