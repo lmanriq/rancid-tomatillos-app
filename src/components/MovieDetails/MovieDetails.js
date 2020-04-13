@@ -8,14 +8,14 @@ import { undoRating } from '../../actions'
 class MovieDetails extends Component {
   constructor(props) {
     super(props);
-    // console.log(this.props)
+    console.log(props)
     this.state = {
       movie: this.props.movies.find(movie => movie.id === this.props.id),
       error: '',
       successMsg: '',
       removedMsg: '',
       currentRating: null,
-      disabled: false
+      disabled: !this.props.reviews.find(review => review.movie_id === this.props.id)
     }
   }
 
@@ -25,6 +25,8 @@ class MovieDetails extends Component {
       .then(res => res.json())
       .then(data => this.setState({movie: data.movie}))
       .catch(err => console.error(err.message))
+
+    
   }
 
   rateMovie(index) {
@@ -142,8 +144,8 @@ class MovieDetails extends Component {
             </div>
             {this.state.error && <p>{this.state.error}</p>}
             {this.state.successMsg && <p>{this.state.successMsg}</p>}
+            {this.state.removedMsg && <p>{this.state.removedMsg}</p>}
             <button disabled={this.state.disabled} onClick={() => this.undoRating()}>undo rating</button>
-{this.state.removedMsg}
           </div>
           <article className = "movie-details">
             <h3>Released: {movie.release_date}</h3>
