@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addReview } from '../../actions'
 import { undoRating } from '../../actions'
+import { fetchSpecificMovie } from '../../apicalls'
 
 class MovieDetails extends Component {
   constructor(props) {
@@ -19,9 +20,7 @@ class MovieDetails extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.id)
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/movies/${this.props.id}`)
-      .then(res => res.json())
+    fetchSpecificMovie(this.props.id)
       .then(data => this.setState({movie: data.movie}))
       .catch(err => console.error(err.message))
   }
