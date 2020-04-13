@@ -12,7 +12,7 @@ const App = () => {
         <NavBar />
         <Switch>
           <Route
-            path="/" exact
+            path="/rancid-tomatillos-app" exact
             component={() =>
               <MovieCardContainer />
             }
