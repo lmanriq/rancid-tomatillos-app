@@ -59,7 +59,7 @@ const NavBar = (props) => {
                 {navDiv}
             </section>
         )
-}
+    }
 
 const mapStateToProps = state => ({
   user: state.loginFlow.user,
