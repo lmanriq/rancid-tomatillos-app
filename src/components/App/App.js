@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import MovieCardContainer from '../MovieCardContainer/MovieCardContainer';
-import MovieDetails from '../MovieDetails/MovieDetails';
-import NavBar from '../NavBar/NavBar';
+import MovieCardContainer from '../../containers/MovieCardContainer/MovieCardContainer';
+import MovieDetails from '../../containers/MovieDetails/MovieDetails';
+import NavBar from '../../containers/NavBar/NavBar';
 import LoginPage from '../LoginPage/LoginPage';
 import { Route, Switch } from 'react-router-dom';
 

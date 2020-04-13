@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MovieCard from '../MovieCard/MovieCard';
+import MovieCard from '../../components/MovieCard/MovieCard';
 import './MovieCardContainer.css';
 import { loadMovies, sortMovies } from '../../actions';
 import { connect } from 'react-redux';
