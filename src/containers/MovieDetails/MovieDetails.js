@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addReview } from '../../actions'
 import { undoRating } from '../../actions'
-import { fetchSpecificMovie } from '../../apicalls'
+import { fetchSpecificMovie, postRating, fetchRatings } from '../../apicalls'
 
 class MovieDetails extends Component {
   constructor(props) {
@@ -29,17 +29,9 @@ class MovieDetails extends Component {
     const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
     if (this.props.user && !currentReview) {
       const rating = index + 1;
-      fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ movie_id: this.props.id, rating: rating })
-      })
-        .then(res => res.json())
+      postRating(rating, this.props.user.id, this.props.id)
         .then(data => {
-          fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`)
-            .then(res => res.json())
+          fetchRatings(this.props)
             .then(data => {
               this.props.addReview(data.ratings.find(rating => rating.movie_id === this.state.movie.id))
             })
@@ -71,9 +63,8 @@ class MovieDetails extends Component {
     }
   }
 
-  undoRating() {
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings`)
-    .then(res => res.json())
+  undoRating() { 
+    fetchRatings(this.props)
     .then(data => {
       this.setState({
         currentRating: data.ratings.find(rating => rating.movie_id === this.state.movie.id)
@@ -81,7 +72,7 @@ class MovieDetails extends Component {
         fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings/${this.state.currentRating.id}`, {
         method: 'DELETE',
       })
-      .then(res => console.log(res))
+      .then(res => res.json())
       .catch(err => console.error(err.message))
       })
     this.props.undoRating(this.state.currentRating)
@@ -101,13 +92,12 @@ class MovieDetails extends Component {
 
   render() {
     const ratingType = () => {
-      if (this.state.disabled) {
+      if (!this.state.disabled) {
         return 'Your Rating:'
       } else {
         return 'Avg. Rating:'
       }
     }
-    // might want to break out the movie destructuring so that we can use jest to mock it
     const { movie } = this.state;
     const currentReview = this.props.reviews.find(review => review.movie_id === this.props.id);
     let stars;
@@ -117,7 +107,7 @@ class MovieDetails extends Component {
       const emptyStars = Array(10 - numStars).fill("/rancid-tomatillos-app/images/star-clear-outline.svg");
       stars = filledStars.concat(emptyStars).map((star, index) => {
         return (
-          <img key={index} onClick={() => this.rateMovie(index)} className = "star" src ={`${star}`} alt = {`${color} star`} />
+          <img key={index} onClick={() => this.rateMovie(index)} data-testid={`star-${index}`} className = "star" src ={`${star}`} alt = {`${color} star`} />
         )
       })
     }
