@@ -51,9 +51,8 @@ const MovieCard = (props) => {
                           <section className="rate-movie">
                             <p>Avg. Rating: {averageStars}</p>
                           </section>}
-      <NavLink to={`/movies/${props.id}`}>
+      <NavLink data-testid={props.id} to={`/movies/${props.id}`}>
         <button
-        data-testid={props.id}
         className="movie-details-btn">View Movie Details</button>
       </NavLink>
     </section>

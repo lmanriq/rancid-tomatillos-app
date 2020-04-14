@@ -348,7 +348,7 @@ describe('App', () => {
     fireEvent.click(loginBtn);
 
     // click on details 
-    fireEvent.click(await waitForElement(getByTestId('1')))
+    fireEvent.click(await waitForElement(() => getByTestId('2')))
 
     const userRating = await waitForElement(() => getByText("Your Rating:"))
     expect(userRating).toBeInTheDocument()
