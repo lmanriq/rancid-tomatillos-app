@@ -1,16 +1,16 @@
 import React from 'react';
-import { render, waitForElement } from '@testing-library/react';
+import { render, waitForElement, fireEvent } from '@testing-library/react';
 import MovieDetails from './MovieDetails';
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from '../../reducers';
-import { fetchSpecificMovie } from '../../apicalls';
+import { fetchSpecificMovie, postRating, fetchRatings, postUser } from '../../apicalls';
 jest.mock('../../apicalls');
 
 describe('Movie Details', () => {
-  it('Should render what we expect', async () => {
-    const store = createStore(rootReducer)
+  beforeEach(() => {
+    
     
     const mockDetails = {
       movie: {
@@ -25,6 +25,10 @@ describe('Movie Details', () => {
     }
 
     fetchSpecificMovie.mockResolvedValueOnce(mockDetails);
+
+  })
+  it('Should render what we expect', async () => {
+    const store = createStore(rootReducer)
 
     const { getByText } = render (
       <Provider store = {store}>
@@ -43,5 +47,74 @@ describe('Movie Details', () => {
     const releaseEl = await waitForElement(() => getByText("Released: 2020-03-05"));
     expect(releaseEl).toBeInTheDocument();
   })
+  it('should be able to rate a movie', async () => {
+
+    
+    //create mocked values
+    // const mockDetails = {
+    //   rating: {
+    //     "id": 534,
+    //     "user_id": 9,
+    //     "movie_id": 1,
+    //     "rating": 4,
+    //     "created_at": "2020-04-14T17:35:46.505Z",
+    //     "updated_at": "2020-04-14T17:35:46.505Z"
+    //   }
+    // }
+
+    
+
+    // const store = createStore(rootReducer)
+    // const { getByText, getByTestId } = render (
+    //   <Provider store = {store}>
+    //     <Router>
+    //       <MovieDetails />
+    //     </Router>
+    //   </Provider>
+    // )
+    
+    
+    // const star = await waitForElement(() => getByTestId('2'))
+    
+    // fireEvent.click(star)
+    // postRating(mockDetails)  
+    // fetchRatings(mockDetails.rating.user_id) 
+    // const notLoggedIn = getByText("You must be logged in to review a movie")
+    // expect(notLoggedIn).toBeInTheDocument()
+
+
+
+    // const userRating = await waitForElement(() => getByText("Your Rating:"))
+   ////assertions
+    // expect(userRating).toBeInTheDocument()
+  })
+  // it('should be able to unrate a movie', async () => {
+  //   const store = createStore(rootReducer)
+  //   const mockDetails = {
+  //     rating: {
+  //       "id": 534,
+  //       "user_id": 9,
+  //       "movie_id": 1,
+  //       "rating": 4,
+  //       "created_at": "2020-04-14T17:35:46.505Z",
+  //       "updated_at": "2020-04-14T17:35:46.505Z"
+  //     }
+  //   }
+  //   postRating(mockDetails)
+  //   deleteRating()
+  //   const { getByText } = render (
+  //     <Provider store = {store}>
+  //       <Router>
+  //         <MovieDetails />
+  //       </Router>
+  //     </Provider>
+  //   )
+  //   fireEvent.click(await waitForElement(() => getByText('undo rating')))
+
+  //   const undoMessage = await waitForElement(() => getByText("This rating has been removed"));
+
+  //   expect(undoMessage).toBeInTheDocument()
+
+  // })
 })
 
