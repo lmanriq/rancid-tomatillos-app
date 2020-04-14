@@ -34,10 +34,12 @@ export const postRating = (rating, userid, id) => {
     },
     body: JSON.stringify({ movie_id: id, rating: rating })
   })
+    .then(res => res.json())
 }
 
 export const deleteRating = (userid, ratingid) => {
   return fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${userid}/ratings${ratingid}`, {
     method: 'DELETE',
   })
+    .then(res => res.json())
 }

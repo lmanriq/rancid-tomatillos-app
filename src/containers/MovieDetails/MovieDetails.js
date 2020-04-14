@@ -30,7 +30,6 @@ class MovieDetails extends Component {
     if (this.props.user && !currentReview) {
       const rating = index + 1;
       postRating(rating, this.props.user.id, this.props.id)
-        .then(res => res.json())
         .then(data => {
           fetchRatings(this.props)
             .then(data => {
@@ -73,7 +72,7 @@ class MovieDetails extends Component {
         fetch(`https://rancid-tomatillos.herokuapp.com/api/v1/users/${this.props.user.id}/ratings/${this.state.currentRating.id}`, {
         method: 'DELETE',
       })
-      .then(res => console.log(res))
+      .then(res => res.json())
       .catch(err => console.error(err.message))
       })
     this.props.undoRating(this.state.currentRating)
